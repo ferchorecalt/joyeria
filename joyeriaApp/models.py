@@ -10,6 +10,6 @@ class Marca(models.Model):
 class Articulo(models.Model):
     modelo = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=500)
-    fecha = models.DateField()
+    fecha = models.DateTimeField(auto_now_add =True)
     imagen = models.ImageField(upload_to='%Y/%m/%d')
     articulo_marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
