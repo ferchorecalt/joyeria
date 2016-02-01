@@ -83,6 +83,18 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'joyeria',
+#        'USER': 'fermin',                      # Not used with sqlite3.
+#        'PASSWORD': 'fermin2015',                  # Not used with sqlite3.
+#        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
+#        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+#    }
+#}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
