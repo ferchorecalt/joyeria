@@ -11,5 +11,5 @@ class Articulo(models.Model):
     modelo = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=500)
     fecha = models.DateField()
-    imagen = models.TextField()
+    imagen = models.ImageField(upload_to='%Y/%m/%d')
     articulo_marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
