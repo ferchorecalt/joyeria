@@ -1,9 +1,13 @@
 from django import forms
+from .models import Marca,Articulo
 
-class ArticuloForm(forms.Form):
-    modelo = forms.CharField(label='Modelo',required=True)
-    descripcion = forms.CharField(label='Descripcion',required=True)
-    imagen = forms.ImageField(required=True)
+class ArticuloForm(forms.ModelForm):
+    class Meta:
+            model = Articulo
+            fields = ('modelo', 'descripcion','imagen',)
 
-class MarcaForm(forms.Form):
-    nombre = forms.CharField(required=True)
+
+class MarcaForm(forms.ModelForm):
+    class Meta:
+            model = Marca
+            fields = ('nombre',)
