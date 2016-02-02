@@ -8,10 +8,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>Jewelex a Fashion Category Flat Bootstrap Responsive Web Template | News :: w3layouts</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
-<!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% load staticfiles %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
 <!--Custom Theme files-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,12 +28,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		/>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="js/modernizr.custom.js"></script>
+<script  src="{% static 'js/modernizr.custom.js' %}"></script>
  <!--start-smoth-scrolling-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -36,8 +42,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</script>
 <!--start-smoth-scrolling-->
 <!--animated-css-->
-		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-		<script src="js/wow.min.js"></script>
+		<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" media="all">
+		<script src="{% static 'js/wow.min.js' %}" ></script>
 		<script>
 		 new WOW().init();
 		</script>
@@ -52,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="header-section two" id="home">
 				<div class="container">
 					 <div class="logo two">
-						<a href="index.html"><img src="images/logo.png" alt=""></a>
+						<a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
 					</div>
 						<span class="menu"></span>
 						<div class="clears"></div>
@@ -96,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<a href="single.html" class="read-more">ReAD MORE</a>
 					</div>
 					<div class="left-news">
-						 <a href="single.html" class="mask"><img src="images/n3.jpg" alt="image" class="img-responsive zoom-img"></a>
+						 <a href="single.html" class="mask"><img src="{% static 'images/n3.jpg' %}" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -111,7 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<a href="single.html" class="read-more">ReAD MORE</a>
 					</div>
 					<div class="left-news">
-						 <a href="single.html" class="mask"><img src="images/n1.jpg" alt="image" class="img-responsive zoom-img"></a>
+						 <a href="single.html" class="mask"><img src="{% static 'images/n1.jpg' %}" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -126,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<a href="single.html" class="read-more">ReAD MORE</a>
 					</div>
 					<div class="left-news">
-						 <a href="single.html" class="mask"><img src="images/n2.jpg" alt="image" class="img-responsive zoom-img"></a>
+						 <a href="single.html" class="mask"><img src="{% static 'images/n2.jpg' %}" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -143,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li>10-765 mg-Road,</li>
 							<li>Washington, DC, United States,</li>	
 							<li>ud-19832-6578.,</li>
-							<li><img src="images/mail.png" alt=""></li>	
+							<li><img src="{% static 'images/mail.png' %}" alt=""></li>
 							<li><a href="mailto:info@example.com">mail@example.com</a></li>
 							<div class="clearfix"> </div>	
 						</ul>
@@ -153,10 +159,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3>Information</h3>
 					<div class="list styled arrow-list2 two">
 						<ul>
-							<li><a href="#"><img src="images/tick.png" alt=""/>Nulla ullamcorper porttitor</a></li>
-							<li><a href="#"><img src="images/tick.png" alt=""/>Fusce consequat porta leo</a></li>
-							<li><a href="#"><img src="images/tick.png" alt=""/>Consectetur adipiscing elit</a></li>
-							<li><a href="#"><img src="images/tick.png" alt=""/>Netus et malesuada fames</a></li>
+							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Nulla ullamcorper porttitor</a></li>
+							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Fusce consequat porta leo</a></li>
+							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Consectetur adipiscing elit</a></li>
+							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Netus et malesuada fames</a></li>
 								<div class="clearfix"></div>
 						</ul>
 					</div>
@@ -176,7 +182,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="copy-right-section  wow bounceInRight" data-wow-delay="0.4s">
 				<div class="container">
 					<div class="col-md-6 copy-right">
-						<a href="index.html"><img src="images/logo2.png" alt=""></a>
+						<a href="index.html"><img src="{% static 'images/logo2.png' %}" alt=""></a>
 						<p>Design by &nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
 					</div>
 					<div class="col-md-6 social-icons">

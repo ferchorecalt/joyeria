@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^news', views.news, name='news'),
     url(r'^mail', views.mail, name='mail'),
     url(r'^index', views.index, name='index'),
+    url(r'^single', views.single, name='single'),
 ]

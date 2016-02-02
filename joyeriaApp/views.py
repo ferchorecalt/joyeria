@@ -21,6 +21,9 @@ def news(request):
 def mail(request):
     return render(request, 'mail.html')
 
+def single(request):
+    return render(request, 'single.html')
+
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
