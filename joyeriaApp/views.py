@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import ArticuloForm,MarcaForm
 from django.http import HttpResponse
 from .models import Marca,Articulo
+from django.template import loader
 
 # Create your views here.
 
