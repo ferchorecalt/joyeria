@@ -8,9 +8,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>Jewelex a Fashion Category Flat Bootstrap Responsive Web Template| Home :: w3layouts</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
-<!-- Custom Theme files -->
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <!--Custom Theme files-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
