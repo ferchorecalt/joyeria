@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^404', views.services, name='services'),
     url(r'^news', views.news, name='news'),
     url(r'^mail', views.mail, name='mail'),
+    url(r'^index', views.index, name='index'),
 ]

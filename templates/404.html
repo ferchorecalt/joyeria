@@ -8,7 +8,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>Jewelex a Fashion Category Flat Bootstrap Responsive Web Template| 404 :: w3layouts</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    {% load staticfiles %}
+
+    {# Load the tag library #}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 <!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
 <!-- Custom Theme files -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -20,8 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		/>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script src="js/modernizr.custom.js"></script>
  <!--start-smoth-scrolling-->
 <script type="text/javascript" src="js/move-top.js"></script>
