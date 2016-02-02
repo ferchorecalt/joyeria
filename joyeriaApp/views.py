@@ -2,9 +2,11 @@ from django.shortcuts import render
 from .forms import ArticuloForm,MarcaForm
 from django.http import HttpResponse
 from .models import Marca,Articulo
-from django.template import loader
 
 # Create your views here.
+
+def index(request):
+    return render(request, 'index.html')
 
 def crear_articulo(request):
     if request.method == 'POST':
