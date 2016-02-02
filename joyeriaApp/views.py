@@ -9,6 +9,18 @@ from django.template import loader
 def index(request):
     return render(request, 'index.html')
 
+def gallery(request):
+    return render(request, 'gallery.html')
+
+def services(request):
+    return render(request, '404.html')
+
+def news(request):
+    return render(request, 'news.html')
+
+def mail(request):
+    return render(request, 'mail.html')
+
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
