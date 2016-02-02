@@ -5,6 +5,9 @@ from .models import Marca,Articulo
 
 # Create your views here.
 
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
