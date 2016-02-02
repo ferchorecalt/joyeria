@@ -27,12 +27,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		/>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="js/modernizr.custom.js"></script>
+{#<script src="{% static 'js/modernizr.custom.js' %}"></script>#}
  <!--start-smoth-scrolling-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -44,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--start-smoth-scrolling-->
 <!--animated-css-->
 		<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" media="all">
-		<script src="js/wow.min.js"></script>
+		<script src="{% static 'js/wow.min.js' %}" ></script>
 		<script>
 		 new WOW().init();
 		</script>
@@ -56,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!--header-->
 	<!-- banner Slider starts Here -->
-					<script src="js/responsiveslides.min.js"></script>
+					<script src="{% static 'js/responsiveslides.min.js' %}" ></script>
 					 <script>
 						// You can also use "$(window).load(function() {"
 						$(function () {
