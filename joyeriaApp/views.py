@@ -29,11 +29,13 @@ def crear_marca(request):
         marca_form = MarcaForm(request.POST)
         if marca_form.is_valid():
             marca = marca_form.save()
-            return HttpResponse('Guardado correctamente')
+            # return HttpResponse('Guardado correctamente')
+            return render(request, 'crearMarca.html', {'form': marca_form,'resultado':'Marca guardada con exito!','verForm':False})
+        else:  return render(request, 'crearMarca.html', {'form': marca_form,'resultado':'La marca no pudo registrarse','verForm':False})
     else:
         marca_form = MarcaForm()
 
-    return render(request, 'crearMarca.html', {'form': marca_form})
+    return render(request, 'crearMarca.html', {'form': marca_form,'verForm':True})
 
 def crear_articulo(request):
     if request.method == 'POST':
