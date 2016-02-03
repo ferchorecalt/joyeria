@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Inicie Sesion</title>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% load staticfiles %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+<!--start-smoth-scrolling-->
+<!--animated-css-->
+		<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" media="all">
+		<script src="{% static 'js/wow.min.js' %}" ></script>
+		<script>
+		 new WOW().init();
+		</script>
+		<!--animated-css-->
+	<!--webfonts-->
+		<link href='http://fonts.googleapis.com/css?family=Vidaloka|Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+	<!--webfonts-->
+</head>
+<body>
+<!--header-->
+		<div class="header-section two" id="home">
+				<div class="container">
+					 <div class="logo two">
+						<a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
+					</div>
+						<span class="menu"></span>
+						<div class="clears"></div>
+						<div class="navigation">
+							<ul class="navig">
+								<li><a href="index.html"><i class="bag"></i><p>About</p><div class="clearfix"></div></a></li>
+								<li class="nab"><a href="gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
+								<li class="naa" ><a href="404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
+								<li class="nac"><a href="news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
+								<li class="nac"><a href="mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
+                                <li class="nac"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
+                                <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
+                            </ul>
+						</div>
+					</div>
+						<script>
+							$( "span.menu" ).click(function() {
+							  $( ".navigation" ).slideToggle( "slow", function() {
+							    // Animation complete.
+							  });
+							});
+						</script>
+						<div class="clearfix"></div>
+				</div>
+	<!--Mail Starts Here -->
+	<div class="Contact">
+		<div class="container">
+				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
+			<h3>Inicie sesion para continuar!</h3>
+			<div id="login">
+                <form class="form-horizontal" name="LoginForm" action="login" method="post">
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                {% endif %}
+                <div class="control-group">
+                    <label class="control-label" for="username">Usuario</label>
+                    <div class="controls">
+                        <input type="text" id="username" name="username"  placeholder="Usuario">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password">Contraseña</label>
+                    <div class="controls">
+                        <input type="password" name="password" id="password" placeholder="Contraseña">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Ingresar</button>
+                    </div>
+                </div>
+                </form>
+            {{ mensaje }}
+            </div>
+	 	 </div>
+        </div>
+	</div>
+</div>
+
+	<!--start-footer-->
+		<div class="copy-right-section  wow bounceInRight" data-wow-delay="0.4s">
+				<div class="container">
+					<div class="col-md-6 copy-right">
+						<a href="index.html"><img src="{% static 'images/logo2.png' %}" alt=""></a>
+						<p>Design by &nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
+					</div>
+					<div class="col-md-6 social-icons">
+								<ul class="soc_icons2">
+									<h5>Follow us :</h5>
+											<li><a href="#"><i class="icon_4"></i></a></li>
+											<li><a href="#"><i class="icon_5"></i></a></li>
+											<li><a href="#"><i class="icon_6"></i></a></li>
+											<div class="clearfix"> </div>
+										</ul>
+							<div class="clearfix"> </div>
+					</div>
+				</div>
+		</div>
+		<!--End-footer-->
+					<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear'
+								 		};
+										*/
+
+										$().UItoTop({ easingType: 'easeOutQuart' });
+
+									});
+					</script>
+					<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+</body>
+</html>

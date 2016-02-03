@@ -1,6 +1,8 @@
 from django import forms
 from .models import Marca,Articulo
 from django.forms import ModelForm, Textarea
+from django.contrib.auth.models import User
+
 
 class ArticuloForm(forms.ModelForm):
     class Meta:
@@ -31,3 +33,4 @@ class MarcaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
          super(MarcaForm, self).__init__(*args, **kwargs)
          self.fields['nombre'].widget.attrs.update({'class' : 'separados'})
+
