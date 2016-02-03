@@ -31,8 +31,6 @@ def crear_marca(request):
             marca = marca_form.save()
             # return HttpResponse('Guardado correctamente')
             marca_form=MarcaForm()
-            return render(request, 'crearMarca.html', {'form': marca_form})
-        else:  return render(request, 'crearMarca.html', {'form': marca_form})
     else:
         marca_form = MarcaForm()
 
