@@ -74,16 +74,12 @@
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Nueva Marca</h3>
-                    {% if verForm %}
+                    {{ resultado }}
                         <form action="crearMarca" method="post">
                             {% csrf_token %}
                             {{ form }}
                             <input type="submit" value="Crear" />
                         </form>
-                    {% else %}
-                        {{ resultado }}
-                        <a href="crearMarca.html">Crear otra Marca</a>
-                    {% endif %}
 	 	 </div>
         </div>
 	</div>
