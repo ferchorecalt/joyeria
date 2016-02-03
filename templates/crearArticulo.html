@@ -74,7 +74,7 @@
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Nuevo Articulo</h3>
-			<form action="crearArticulo" method="post">
+			<form action="crearArticulo" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{ form }}
                 <input type="submit" value="Crear" />

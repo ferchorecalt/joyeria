@@ -4,7 +4,7 @@ from django.http import *
 from .models import Marca,Articulo
 from django.template import loader,RequestContext
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout
 
 # Create your views here.
 
@@ -45,11 +45,8 @@ def crear_marca(request):
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
-        marca_form = MarcaForm(request.POST)
-        if articulo_form.is_valid() & marca_form.is_valid():
+        if articulo_form.is_valid():
             art = articulo_form.save(commit=False)
-            marca = marca_form.save()
-            art.articulo_marca = marca
             art.save()
             return HttpResponse('Guardado correctamente')
     else:
@@ -71,7 +68,7 @@ def login(request):
             if user.is_active:
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
-                login(request, user)
+                auth_login(request, user)
                 return HttpResponseRedirect('login.html') #habria que ver que hacer aca
             else:
                 # An inactive account was used - no logging in!
