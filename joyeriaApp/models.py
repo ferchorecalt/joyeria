@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Marca(models.Model):
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=30, unique=True)
 
 class Articulo(models.Model):
     modelo = models.CharField(max_length=30)
