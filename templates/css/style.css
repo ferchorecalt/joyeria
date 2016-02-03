@@ -53,6 +53,9 @@ transition: 0.5s all;
 background: #cc7a00;
 color: #fff;
 }
+.separados{
+	display: block;
+}
 ul.navig li p{
 	font-size:0.8em;
 	margin:0;
