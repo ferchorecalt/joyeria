@@ -1,5 +1,5 @@
 from django.shortcuts import render,render_to_response,redirect
-from .forms import ArticuloForm,MarcaForm
+from .forms import ArticuloForm,MarcaForm,UserForm
 from django.http import *
 from .models import Marca,Articulo
 from django.template import loader,RequestContext
@@ -27,7 +27,6 @@ def single(request):
     return render(request, 'single.html')
 
 
-
 @login_required(login_url='login.html')
 def crear_marca(request):
     if request.method == 'POST':
@@ -41,7 +40,7 @@ def crear_marca(request):
 
     return render(request, 'crearMarca.html', {'form': marca_form})
 
-@login_required(login_url='login')
+@login_required(login_url='login.html')
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)

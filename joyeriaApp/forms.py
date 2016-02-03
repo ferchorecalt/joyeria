@@ -23,9 +23,7 @@ class ArticuloForm(forms.ModelForm):
         super(ArticuloForm, self).__init__(*args, **kwargs)
         self.fields['articulo_marca'].label = "Marca"
         for field in self.fields.values():
-            field.widget.attrs.update({'class' : 'separados'})
-            field.error_messages = {'required':'El campo {fieldname} es requerido'.format(
-                fieldname=field.label)}
+            field.error_messages = {'required':'El campo {fieldname} es requerido'.format(fieldname=field.label)}
 
 class MarcaForm(forms.ModelForm):
     class Meta:
@@ -37,7 +35,4 @@ class MarcaForm(forms.ModelForm):
                     'required':'Debe ingresar un nombre de marca!',
                 },
             }
-    def __init__(self, *args, **kwargs):
-         super(MarcaForm, self).__init__(*args, **kwargs)
-         self.fields['nombre'].widget.attrs.update({'class' : 'separados'})
 
