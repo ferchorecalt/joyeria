@@ -58,7 +58,7 @@ ul.navig li p{
 	margin:0;
 }
 ul.navig li a i{
-	width:64px;
+	width:84px;
 	height:64px;
 	background:url(../images/icons.png)no-repeat;
 	display: inline-block;
@@ -80,6 +80,9 @@ ul.navig li a i.send{
 }
 ul.navig li a i.crearArticulo{
 	background-position: -818px 18px;
+}
+ul.navig li a i.crearMarca{
+	background-position: -978px 18px;
 }
 /*-- Header parts Ends Here --*/
 

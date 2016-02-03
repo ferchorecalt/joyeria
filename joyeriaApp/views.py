@@ -24,6 +24,17 @@ def mail(request):
 def single(request):
     return render(request, 'single.html')
 
+def crear_marca(request):
+    if request.method == 'POST':
+        marca_form = MarcaForm(request.POST)
+        if marca_form.is_valid():
+            marca = marca_form.save()
+            return HttpResponse('Guardado correctamente')
+    else:
+        marca_form = MarcaForm()
+
+    return render(request, 'crearMarca.html', {'form': marca_form})
+
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
