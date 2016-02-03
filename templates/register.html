@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Inicie Sesion</title>
+<title>Registrarse</title>
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 {% load staticfiles %}
 {# Load the tag library #}
@@ -73,34 +73,28 @@
 	<div class="Contact">
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
-			<h3>Inicie sesion para continuar!</h3>
-			<div id="login">
-                <form class="form-horizontal" name="LoginForm" action="login" method="post">
-                {% csrf_token %}
-                {% if next %}
-                    <input type="hidden" name="next" value="{{ next }}" />
-                {% endif %}
-                <div class="control-group">
-                    <label class="control-label" for="username">Usuario</label>
-                    <div class="controls">
-                        <input type="text" id="username" name="username"  placeholder="Usuario">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="password">Contraseña</label>
-                    <div class="controls">
-                        <input type="password" name="password" id="password" placeholder="Contraseña">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn">Ingresar</button>
-                    </div>
-                </div>
+			<h3>Registrate!</h3>
+			{% if registered %}
+                Rango says: <strong>thank you for registering!</strong>
+                <a href="/rango/">Return to the homepage.</a><br />
+                {% else %}
+                Rango says: <strong>register here!</strong><br />
+
+                <form id="user_form" method="post" action="/rango/register/"
+                        enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <!-- Display each form. The as_p method wraps each element in a paragraph
+                         (<p>) element. This ensures each element appears on a new line,
+                         making everything look neater. -->
+                    {{ user_form.as_p }}
+
+                    <!-- Provide a button to click to submit the form. -->
+                    <input type="submit" name="submit" value="Register" />
                 </form>
-            {{ mensaje }}
-            </div>
-                <a href="register.html">Registrate!</a>
+                {% endif %}
+
 	 	 </div>
         </div>
 	</div>

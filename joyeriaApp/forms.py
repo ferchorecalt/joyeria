@@ -3,6 +3,13 @@ from .models import Marca,Articulo
 from django.forms import ModelForm, Textarea
 from django.contrib.auth.models import User
 
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
 
 class ArticuloForm(forms.ModelForm):
     class Meta:

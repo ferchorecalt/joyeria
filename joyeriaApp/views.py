@@ -26,7 +26,9 @@ def mail(request):
 def single(request):
     return render(request, 'single.html')
 
-# @login_required(login_url='login.html')
+
+
+@login_required(login_url='login.html')
 def crear_marca(request):
     if request.method == 'POST':
         marca_form = MarcaForm(request.POST)
@@ -39,7 +41,7 @@ def crear_marca(request):
 
     return render(request, 'crearMarca.html', {'form': marca_form})
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
@@ -70,7 +72,7 @@ def login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/rango/') #habria que ver que hacer aca
+                return HttpResponseRedirect('login.html') #habria que ver que hacer aca
             else:
                 # An inactive account was used - no logging in!
                 return render(request, 'login.html', {'mensaje':'Cuenta inhabilitada'})
@@ -85,7 +87,6 @@ def login(request):
         # blank dictionary object...
         return render(request, 'login.html')
 
-#AUN NO USADO!
 def register(request):
     context = RequestContext(request)
 
@@ -116,10 +117,9 @@ def register(request):
 
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
 
     # Render the template depending on the context.
     return render_to_response(
-            'rango/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+            'register.html',
+            {'user_form': user_form, 'registered': registered},
             context)
