@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^mail', views.mail, name='mail'),
     url(r'^index', views.index, name='index'),
     url(r'^single', views.single, name='single'),
+    url(r'^crearArticulo', views.crear_articulo, name='crearArticulo'),
 ]

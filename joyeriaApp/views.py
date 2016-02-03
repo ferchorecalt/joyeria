@@ -34,3 +34,7 @@ def crear_articulo(request):
             art.articulo_marca = marca
             art.save()
             return HttpResponse('Guardado correctamente')
+    else:
+        articulo_form = ArticuloForm()
+
+    return render(request, 'crearArticulo.html', {'form': articulo_form})

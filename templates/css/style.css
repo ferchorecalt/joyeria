@@ -78,6 +78,9 @@ ul.navig li a i.message{
 ul.navig li a i.send{
 	background-position: -658px 15px;
 }
+ul.navig li a i.crearArticulo{
+	background-position: -818px 18px;
+}
 /*-- Header parts Ends Here --*/
 
 #slider2,
