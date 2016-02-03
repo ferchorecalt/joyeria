@@ -75,13 +75,10 @@
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Registrate!</h3>
 			{% if registered %}
-                Rango says: <strong>thank you for registering!</strong>
-                <a href="/rango/">Return to the homepage.</a><br />
+                <strong>Usuario Registrado!</strong>
                 {% else %}
-                Rango says: <strong>register here!</strong><br />
-
-                <form id="user_form" method="post" action="/rango/register/"
-                        enctype="multipart/form-data">
+                
+                <form id="user_form" method="post" action="register" enctype="multipart/form-data">
 
                     {% csrf_token %}
 

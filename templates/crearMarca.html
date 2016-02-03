@@ -76,7 +76,7 @@
 			<h3>Nueva Marca</h3>
                         <form action="crearMarca" method="post">
                             {% csrf_token %}
-                            {{ form }}
+                            {{ form.as_p }}
                             <input type="submit" value="Crear" />
                         </form>
 	 	 </div>
