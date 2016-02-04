@@ -17,4 +17,7 @@ urlpatterns = [
     url(r'^logout', views.logout_view, name='logout'),
     url(r'^listadoArticulos', views.listadoArticulos, name='listadoArticulos'),
     url(r'^listadoMarcas', views.listadoMarcas, name='listadoMarcas'),
+    url(r'^eliminarArticulo/(?P<pk>\d+)$', views.eliminarArticulo, name='eliminarArticulo'),
+    url(r'^editarArticulo/(?P<pk>\d+)$', views.editarArticulo, name='editarArticulo'),
+
 ]

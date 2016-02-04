@@ -26,6 +26,15 @@ def mail(request):
 def single(request):
     return render(request, 'single.html')
 
+def editarArticulo(request, pk):
+    articulo = Articulo.objects.get(pk=pk)
+    return render(request, 'editarArticulo.html', {'articulo':articulo})
+
+def eliminarArticulo(request, pk):
+    articulo = Articulo.objects.get(pk=pk)
+    articulo.delete()
+    return redirect('listadoArticulos')
+
 @login_required(login_url='login.html')
 def listadoArticulos(request):
     articulos = Articulo.objects.all()
