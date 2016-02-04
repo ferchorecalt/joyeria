@@ -28,8 +28,8 @@ def single(request):
 
 def editarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
-    articulo_form = EditarArticuloForm(request.POST, {'articulo':articulo})
-    return render(request, 'editarArticulo.html')
+    articulo_form = EditarArticuloForm(request.POST, articulo=articulo)
+    return render(request, 'editarArticulo.html', {'form': articulo_form})
 
 def eliminarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
