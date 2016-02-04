@@ -45,8 +45,9 @@ class EditarArticuloForm(forms.Form):
     def __init__(self, *args, **kwargs):
         articulo_viniente = kwargs.pop('articulo')
         super(EditarArticuloForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
-            self.fields[field].initial=articulo_viniente.field
+        # self.fields['articulo_marca'].label = articulo_viniente.articulo_marca.nombre
+        # for field in self.fields.values():
+        #     self.fields[field].initial=articulo_viniente.field
 
 class MarcaForm(forms.ModelForm):
     class Meta:
