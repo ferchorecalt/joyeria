@@ -112,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <td>{{ articulo.modelo }}</td>
                                     <td>{{ articulo.descripcion }}</td>
                                     <td>{{ articulo.fecha }}</td>
-                                    <td><img src="{{ MEDIA_URL }}{{ articulo.imagen}}" alt=""> </td>
+                                    <td><img src="{{ articulo.imagen.url}}" alt="imagen del articulo {{ forloop.counter }}"> </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
