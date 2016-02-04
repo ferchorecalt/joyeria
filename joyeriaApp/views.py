@@ -1,7 +1,6 @@
 from django.shortcuts import render,render_to_response,redirect
-from .forms import ArticuloForm,MarcaForm
+from .forms import ArticuloForm,MarcaForm,UserForm
 from django.http import *
-from django.contrib.auth.forms import UserCreationForm
 from .models import Marca,Articulo
 from django.template import loader,RequestContext
 from django.contrib.auth.decorators import login_required
@@ -92,7 +91,7 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
-        user_form = UserCreationForm(data=request.POST)
+        user_form = UserForm(request.POST)
 
         if user_form.is_valid():
             user = user_form.save()
@@ -110,7 +109,7 @@ def register(request):
             print (user_form.errors)
 
     else:
-        user_form = UserCreationForm()
+        user_form = UserForm()
 
     # Render the template depending on the context.
     return render(request,

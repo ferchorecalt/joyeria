@@ -1,8 +1,21 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from .models import Marca,Articulo
 from django.forms import ModelForm, Textarea
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+class UserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        help_texts = { 'username': 'El campo es obligatorio. Se pueden ingresar letras, digitos y @/./+/-/_ unicamente', }
+        self.fields['username'].label = "Nombre de usuario"
+        self.fields['username'].error_messages = {'invalid': 'El usuario ingresado ya existe'}
+        self.fields['username'].error_messages = {'required': 'El campo es obligatorio. Se pueden ingresar letras, digitos y @/./+/-/_ unicamente'}
+        self.fields['password1'].label = "Contraseña"
+        self.fields['password2'].label = "Repita la contraseña"
+        self.fields['password1'].error_messages = {'required': 'La contraseña es obligatoria'}
+        self.fields['password2'].error_messages = {'required': 'La contraseña es obligatoria'}
 
 
 class ArticuloForm(forms.ModelForm):
