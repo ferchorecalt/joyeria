@@ -1,5 +1,5 @@
 from django.shortcuts import render,render_to_response,redirect
-from .forms import ArticuloForm,MarcaForm,UserForm, EditarArticuloForm
+from .forms import ArticuloForm,MarcaForm,UserForm
 from django.http import *
 from .models import Marca,Articulo
 from django.template import loader,RequestContext
@@ -28,7 +28,7 @@ def single(request):
 
 def editarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
-    articulo_form = EditarArticuloForm(request.POST, articulo=articulo)
+    articulo_form = ArticuloForm(instance=articulo)
     return render(request, 'editarArticulo.html', {'form': articulo_form})
 
 def eliminarArticulo(request, pk):

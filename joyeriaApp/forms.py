@@ -33,21 +33,6 @@ class ArticuloForm(forms.ModelForm):
         for field in self.fields.values():
             field.error_messages = {'required':'El campo {fieldname} es requerido'.format(fieldname=field.label)}
 
-class EditarArticuloForm(forms.Form):
-    class Meta:
-            model = Articulo
-            # fields = ('modelo', 'descripcion','imagen','articulo_marca')
-            fields = '__all__'
-            widgets = {
-                'descripcion': Textarea(attrs={'cols': 40, 'rows': 10, 'placeholder': 'Ingrese una breve descripcion del articulo a ofrecer'}),
-            }
-
-    def __init__(self, *args, **kwargs):
-        articulo_viniente = kwargs.pop('articulo')
-        super(EditarArticuloForm, self).__init__(*args, **kwargs)
-        # self.fields['articulo_marca'].label = articulo_viniente.articulo_marca.nombre
-        # for field in self.fields.values():
-        #     self.fields[field].initial=articulo_viniente.field
 
 class MarcaForm(forms.ModelForm):
     class Meta:
