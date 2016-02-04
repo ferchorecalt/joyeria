@@ -1,6 +1,7 @@
 from django.shortcuts import render,render_to_response,redirect
-from .forms import ArticuloForm,MarcaForm,UserForm
+from .forms import ArticuloForm,MarcaForm
 from django.http import *
+from django.contrib.auth.forms import UserCreationForm
 from .models import Marca,Articulo
 from django.template import loader,RequestContext
 from django.contrib.auth.decorators import login_required
@@ -68,7 +69,7 @@ def login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 auth_login(request, user)
-                return HttpResponseRedirect('login.html') #habria que ver que hacer aca
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
                 # An inactive account was used - no logging in!
                 return render(request, 'login.html', {'mensaje':'Cuenta inhabilitada'})
@@ -91,28 +92,25 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+        user_form = UserCreationForm(data=request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            profile.save()
             registered = True
+            user_auth = authenticate(username=user.username, password=user.password)
+            if user_auth:
+                # Is the account active? It could have been disabled.
+                if user_auth.is_active:
+                    # If the account is valid and active, we can log the user in.
+                    # We'll send the user back to the homepage.
+                    auth_login(request, user_auth)
+                    # return render(request, 'index.html')
 
         else:
-            print (user_form.errors, profile_form.errors)
+            print (user_form.errors)
 
     else:
-        user_form = UserForm()
+        user_form = UserCreationForm()
 
     # Render the template depending on the context.
     return render_to_response(
