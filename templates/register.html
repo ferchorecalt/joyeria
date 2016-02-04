@@ -55,8 +55,13 @@
 								<li class="naa" ><a href="404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
 								<li class="nac"><a href="news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
 								<li class="nac"><a href="mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
-                                <li class="nac"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
-                                <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
+                                {% if user.is_authenticated %}
+                                     <li class="nae"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
+                                     <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
+                                    <a href="logout"><span class="glyphicon glyphicon-off">SALIR</span></a>
+                                {% else %}
+                                    <a href="login"><span class="glyphicon glyphicon-home">INGRESAR</span></a>
+                                {% endif %}
                             </ul>
 						</div>
 					</div>

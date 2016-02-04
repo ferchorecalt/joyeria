@@ -68,7 +68,8 @@ def login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 auth_login(request, user)
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return render(request, 'index.html')
             else:
                 # An inactive account was used - no logging in!
                 return render(request, 'login.html', {'mensaje':'Cuenta inhabilitada'})
