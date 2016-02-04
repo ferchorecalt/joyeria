@@ -28,11 +28,13 @@ def single(request):
 
 @login_required(login_url='login.html')
 def listadoArticulos(request):
-    return render(request, 'listadoArticulos.html')
+    articulos = Articulo.objects.all()
+    return render(request, 'listadoArticulos.html', {'articulos':articulos})
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):
-    return render(request, 'listadoMarcas.html')
+    marcas = Marca.objects.all()
+    return render(request, 'listadoMarcas.html', {'marcas':marcas})
 
 @login_required(login_url='login.html')
 def crear_marca(request):
@@ -54,7 +56,8 @@ def crear_articulo(request):
         if articulo_form.is_valid():
             art = articulo_form.save(commit=False)
             art.save()
-            return HttpResponse('Guardado correctamente')
+            # return HttpResponse('Guardado correctamente')
+            return redirect('listadoArticulos')
     else:
         articulo_form = ArticuloForm()
 
@@ -76,7 +79,7 @@ def login(request):
                 # We'll send the user back to the homepage.
                 auth_login(request, user)
                 # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                return render(request, 'listadoArticulos.html')
+                return redirect('listadoArticulos')
             else:
                 # An inactive account was used - no logging in!
                 return render(request, 'login.html', {'mensaje':'Cuenta inhabilitada'})

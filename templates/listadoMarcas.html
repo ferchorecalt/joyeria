@@ -88,11 +88,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</script>
 						<div class="clearfix"></div>
 				</div>
-	<!--Mail Starts Here -->
-	<div class="Contact">
+
+    <div class="Contact">
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
-                        LISTADO DE MARCAS
+                    <h3>LISTADO DE MARCAS</h3>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for marca in marcas %}
+                                <tr>
+                                    <td>{{ marca.nombre }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
 			    </div>
         </div>
      </div>
