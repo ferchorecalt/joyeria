@@ -26,6 +26,13 @@ def mail(request):
 def single(request):
     return render(request, 'single.html')
 
+@login_required(login_url='login.html')
+def listadoArticulos(request):
+    return render(request, 'listadoArticulos.html')
+
+@login_required(login_url='login.html')
+def listadoMarcas(request):
+    return render(request, 'listadoMarcas.html')
 
 @login_required(login_url='login.html')
 def crear_marca(request):
@@ -69,7 +76,7 @@ def login(request):
                 # We'll send the user back to the homepage.
                 auth_login(request, user)
                 # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                return render(request, 'index.html')
+                return render(request, 'listadoArticulos.html')
             else:
                 # An inactive account was used - no logging in!
                 return render(request, 'login.html', {'mensaje':'Cuenta inhabilitada'})

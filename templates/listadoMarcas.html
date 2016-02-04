@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Jewelexa Fashion Category Flat Bootstrap Responsive Web Template| Mail :: w3layouts</title>
+<title>Listado de Marcas</title>
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 {% load staticfiles %}
 {# Load the tag library #}
@@ -23,8 +23,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--Custom Theme files-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Jewelex Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" 
+<meta name="keywords" content="Jewelex Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"
 		/>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script  src="{% static 'js/modernizr.custom.js' %}"></script>
@@ -33,7 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
+				$(".scroll").click(function(event){
 					event.preventDefault();
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!--animated-css-->
 	<!--webfonts-->
 		<link href='http://fonts.googleapis.com/css?family=Vidaloka|Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
-	<!--webfonts-->	
+	<!--webfonts-->
 </head>
 <body>
 <!--header-->
@@ -64,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="navig">
 								{% if user.is_authenticated %}
                                     <li class="nae"><a href="listadoArticulos.html"><i class="crearArticulo"></i><p>Listado Articulos</p><div class="clearfix"></div></a></li>
-                                    <li class="nae"><a href="listadoMarcas.html"><i class="crearMarca"></i><p>Listado Marcas</p><div class="clearfix"></div></a></li>
+                                    <li class="nae"><a href="listadoMarcas.html"><i class="crearMarca"></i><p class="active">Listado Marcas</p><div class="clearfix"></div></a></li>
                                     <li class="nae"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
                                      <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
                                     <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
@@ -73,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <li class="nab"><a href="gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
                                     <li class="naa" ><a href="404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
                                     <li class="nac"><a href="news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
-                                    <li class="nac"><a href="mail.html"><i class="send"></i><p class="active">Mail Us</p><div class="clearfix"></div></a></li>
+                                    <li class="nac"><a href="mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
                                     <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-home"></span></p>Ingresar</a></li>
                                 {% endif %}
                             </ul>
@@ -92,61 +92,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="Contact">
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
-			<h3>Contact Us </h3>
-			 <form>
-				 <input type="text" class="text" value="Enter Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Name';}">
-				 <input type="text" class="text" value="Enter Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Mail';}">
-				 <input type="text" class="text" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
-				<textarea value="message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Message... ';}">Enter Message...</textarea>
-
-				 <div class="clearfix"> </div>
-				 <input type="submit" value="SEND MESSAGE">
-			 </form>
-	 	 </div>
-<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=47%20607%20La%20Pata%2C%20Buenos%20Aires&key=AIzaSyDSI-oEdzU-6cql8jaRduT1IJHyowrybK8" allowfullscreen></iframe>
-             </div>
-
-	</div>
-</div>
-	<!--start-information-->
-	<div class="information-section">
-		<div class="container">
-			<div class="information-grids wow bounceInLeft" data-wow-delay="0.4s">
-				<div class="col-md-4 info-grid loction">
-					<h3>Location</h3>
-					 <ul class="loction-text">
-							<li>10-765 mg-Road,</li>
-							<li>Washington, DC, United States,</li>	
-							<li>ud-19832-6578.,</li>
-							<li><img src="{% static 'images/mail.png' %}" alt=""></li>
-							<li><a href="mailto:info@example.com">mail@example.com</a></li>
-							<div class="clearfix"> </div>	
-						</ul>
-
-				</div>
-				<div class="col-md-4 info-grid information">
-					<h3>Information</h3>
-					<div class="list styled arrow-list2 two">
-						<ul>
-							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Nulla ullamcorper porttitor</a></li>
-							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Fusce consequat porta leo</a></li>
-							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Consectetur adipiscing elit</a></li>
-							<li><a href="#"><img src="{% static 'images/tick.png' %}" alt=""/>Netus et malesuada fames</a></li>
-								<div class="clearfix"></div>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4 info-grid custom">
-					<h3>Custom Block</h3>
-					<h4>Quisque maximus purus in </h4>
-					<p>Duis ullamcorper at lectus ac accum
-					san. Quisque pellentesque et mauris tellus. Proin 
-					pellentesque lectus  magna null.</p>
-				</div>
-					<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
+                        LISTADO DE MARCAS
+			    </div>
+        </div>
+     </div>
 	<!--start-footer-->
 		<div class="copy-right-section  wow bounceInRight" data-wow-delay="0.4s">
 				<div class="container">
@@ -174,12 +123,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								  			containerID: 'toTop', // fading element id
 											containerHoverID: 'toTopHover', // fading element hover id
 											scrollSpeed: 1200,
-											easingType: 'linear' 
+											easingType: 'linear'
 								 		};
 										*/
-										
+
 										$().UItoTop({ easingType: 'easeOutQuart' });
-										
+
 									});
 					</script>
 					<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
