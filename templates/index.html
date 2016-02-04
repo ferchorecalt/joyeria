@@ -124,9 +124,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							     {% if user.is_authenticated %}
                                      <li class="nae"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
                                      <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
-                                    <a href="logout"><span class="glyphicon glyphicon-off">SALIR</span></a>
+                                    <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
                                 {% else %}
-                                    <a href="login"><span class="glyphicon glyphicon-home">INGRESAR</span></a>
+                                    <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-home"></span></p>Ingresar</a></li>
                                 {% endif %}
                             </ul>
 						</div>
