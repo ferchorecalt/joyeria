@@ -64,8 +64,7 @@ def crear_articulo(request):
     if request.method == 'POST':
         articulo_form = ArticuloForm(request.POST, request.FILES)
         if articulo_form.is_valid():
-            art = articulo_form.save(commit=False)
-            art.save()
+            articulo_form.save()
             # return HttpResponse('Guardado correctamente')
             return redirect('listadoArticulos')
     else:
