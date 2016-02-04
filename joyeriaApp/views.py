@@ -28,13 +28,35 @@ def single(request):
 
 def editarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
-    articulo_form = ArticuloForm(instance=articulo)
-    return render(request, 'editarArticulo.html', {'form': articulo_form})
+    if request.method == 'POST':
+        articulo_form = ArticuloForm(request.POST)
+        if articulo_form.is_valid():
+            articuloActualizado = articulo_form.save()
+            return redirect('listadoArticulos')
+    else:
+        articulo_form = ArticuloForm(instance=articulo)
+        return render(request, 'editarArticulo.html', {'form': articulo_form},{'pk':pk})
 
 def eliminarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
     articulo.delete()
     return redirect('listadoArticulos')
+
+def eliminarMarca(request, pk):
+    marca = Marca.objects.get(pk=pk)
+    marca.delete()
+    return redirect('listadoMarcas')
+
+def editarMarca(request, pk):
+    marca = Marca.objects.get(pk=pk)
+    if request.method == 'POST':
+        marca_form = MarcaForm(request.POST)
+        if marca_form.is_valid():
+            marcaActualizada = marca_form.save()
+            return redirect('listadoMarcas')
+    else:
+        marca_form = MarcaForm(instance=marca)
+        return render(request, 'editarMarca.html', {'form': marca_form},{'pk':pk})
 
 @login_required(login_url='login.html')
 def listadoArticulos(request):

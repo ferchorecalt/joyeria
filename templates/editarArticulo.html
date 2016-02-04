@@ -51,11 +51,11 @@
 						<div class="navigation">
 							<ul class="navig">
 								{% if user.is_authenticated %}
-                                    <li class="nae"><a href="listadoArticulos"><p ><span class="glyphicon glyphicon-list"></span></p>Listado Articulos</a></li>
-                                    <li class="nae"><a href="listadoMarcas"><p><span class="glyphicon glyphicon-list"></span></p>Listado Marcas</a></li>
-                                    <li class="nae"><a href="crearArticulo"><p  class="active"><span class="glyphicon glyphicon-pencil"></span></p>Nuevo Articulo</a></li>
-                                    <li class="nae"><a href="crearMarca"><p><span class="glyphicon glyphicon-pencil"></span></p>Nueva Marca</a></li>
-                                    <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
+                                    <li class="nae"><a href="../listadoArticulos"><p ><span class="glyphicon glyphicon-list"></span></p>Listado Articulos</a></li>
+                                    <li class="nae"><a href="../listadoMarcas"><p><span class="glyphicon glyphicon-list"></span></p>Listado Marcas</a></li>
+                                    <li class="nae"><a href="../crearArticulo"><p  class="active"><span class="glyphicon glyphicon-pencil"></span></p>Nuevo Articulo</a></li>
+                                    <li class="nae"><a href="../crearMarca"><p><span class="glyphicon glyphicon-pencil"></span></p>Nueva Marca</a></li>
+                                    <li class="nae"><a href="../logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
                                 {% else %}
                                      <li><a href="index.html"><i class="bag"></i><p>About</p><div class="clearfix"></div></a></li>
                                     <li class="nab"><a href="gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
@@ -81,10 +81,10 @@
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Editando Articulo</h3>
-			<form action="crearArticulo" method="post" enctype="multipart/form-data" >
+			<form action="../editarArticulo/{{ pk }}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Crear" />
+                <input type="submit" value="Actualizar" />
             </form>
 	 	 </div>
         </div>
