@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 class UserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        help_texts = { 'username': 'El campo es obligatorio. Se pueden ingresar letras, digitos y @/./+/-/_ unicamente', }
         self.fields['username'].label = "Nombre de usuario"
         self.fields['username'].help_text="Requerido. Hasta 150 caracteres. Letras, digitos y @/./+/-/_ solamente."
         self.fields['username'].error_messages = {'invalid': 'El usuario ingresado ya existe'}
