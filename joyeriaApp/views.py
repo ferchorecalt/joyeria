@@ -45,6 +45,22 @@ def eliminarArticulo(request, pk):
     articulo.delete()
     return redirect('listadoArticulos')
 
+def eliminarMarca(request, pk):
+    marca = Marca.objects.get(pk=pk)
+    marca.delete()
+    return redirect('listadoMarcas')
+
+def editarMarca(request, pk):
+    marca = Marca.objects.get(pk=pk)
+    if request.method == 'POST':
+        marca_form = MarcaForm(request.POST)
+        if marca_form.is_valid():
+            marcaActualizada = marca_form.save()
+            return redirect('listadoMarcas')
+    else:
+        marca_form = MarcaForm(instance=marca)
+        return render(request, 'editarMarca.html', {'form': marca_form},{'pk':pk})
+
 @login_required(login_url='login.html')
 def listadoArticulos(request):
     articulos = Articulo.objects.all()

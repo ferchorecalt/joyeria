@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^listadoMarcas', views.listadoMarcas, name='listadoMarcas'),
     url(r'^eliminarArticulo/(?P<pk>\d+)$', views.eliminarArticulo, name='eliminarArticulo'),
     url(r'^editarArticulo/(?P<pk>\d+)$', views.editarArticulo, name='editarArticulo'),
-
+    url(r'^eliminarMarca/(?P<pk>\d+)$', views.eliminarMarca, name='eliminarMarca'),
+    url(r'^editarMarca/(?P<pk>\d+)$', views.editarMarca, name='editarMarca'),
 ]
