@@ -51,15 +51,17 @@ def eliminarMarca(request, pk):
     return redirect('listadoMarcas')
 
 def editarMarca(request, pk):
-    marca = Marca.objects.get(pk=pk)
-    if request.method == 'POST':
-        marca_form = MarcaForm(request.POST)
-        if marca_form.is_valid():
-            marcaActualizada = marca_form.save()
-            return redirect('listadoMarcas')
-    else:
+    if request.method == 'GET':
+        marca = Marca.objects.get(pk=pk)
         marca_form = MarcaForm(instance=marca)
-        return render(request, 'editarMarca.html', {'form': marca_form},{'pk':pk})
+        return render(request, 'editarMarca.html', {'form': marca_form,'id':marca.pk})
+    else:
+        marca_editar = Marca.objects.get(pk=pk)
+        marca_form = MarcaForm(request.POST, request.FILES,instance=marca_editar)
+        if marca_form.is_valid():
+            marca_form.save()
+            # return HttpResponse('Guardado correctamente')
+            return redirect('listadoMarcas')
 
 @login_required(login_url='login.html')
 def listadoArticulos(request):
