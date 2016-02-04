@@ -50,16 +50,16 @@
 						<div class="clears"></div>
 						<div class="navigation">
 							<ul class="navig">
-								<li><a href="index.html"><i class="bag"></i><p>About</p><div class="clearfix"></div></a></li>
-								<li class="nab"><a href="gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
-								<li class="naa" ><a href="404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
-								<li class="nac"><a href="news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
-								<li class="nac"><a href="mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
                                  {% if user.is_authenticated %}
                                      <li class="nae"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
                                      <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
                                     <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
                                 {% else %}
+                                     <li><a href="index.html"><i class="bag"></i><p>About</p><div class="clearfix"></div></a></li>
+                                    <li class="nab"><a href="gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
+                                    <li class="naa" ><a href="404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
+                                    <li class="nac"><a href="news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
+                                    <li class="nac"><a href="mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
                                     <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-home"></span></p>Ingresar</a></li>
                                 {% endif %}
                             </ul>
