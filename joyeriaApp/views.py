@@ -113,7 +113,10 @@ def register(request):
         user_form = UserCreationForm()
 
     # Render the template depending on the context.
-    return render_to_response(
+    return render(request,
             'register.html',
-            {'user_form': user_form, 'registered': registered},
-            context)
+            {'user_form': user_form, 'registered': registered})
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')

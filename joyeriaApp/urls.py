@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^crearMarca', views.crear_marca, name='crearMarca'),
     url(r'^login', views.login, name='login'),
     url(r'^register', views.register, name='register'),
+    url(r'^logout', views.logout_view, name='logout'),
 ]
