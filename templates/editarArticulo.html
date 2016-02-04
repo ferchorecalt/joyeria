@@ -81,10 +81,10 @@
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Editando Articulo</h3>
-			<form action="crearArticulo" method="post" enctype="multipart/form-data" >
+			<form action="{% url 'editarArticulo' id %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Crear" />
+                <input type="submit" value="Editar" />
             </form>
 	 	 </div>
         </div>

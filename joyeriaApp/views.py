@@ -26,10 +26,19 @@ def mail(request):
 def single(request):
     return render(request, 'single.html')
 
+@login_required(login_url='login.html')
 def editarArticulo(request, pk):
-    articulo = Articulo.objects.get(pk=pk)
-    articulo_form = ArticuloForm(instance=articulo)
-    return render(request, 'editarArticulo.html', {'form': articulo_form})
+    if request.method == 'GET':
+        articulo = Articulo.objects.get(pk=pk)
+        articulo_form = ArticuloForm(instance=articulo)
+        return render(request, 'editarArticulo.html', {'form': articulo_form,'id':articulo.pk})
+    else:
+        articulo_editar = Articulo.objects.get(pk=pk)
+        articulo_form = ArticuloForm(request.POST, request.FILES,instance=articulo_editar)
+        if articulo_form.is_valid():
+            articulo_form.save()
+            # return HttpResponse('Guardado correctamente')
+            return redirect('listadoArticulos')
 
 def eliminarArticulo(request, pk):
     articulo = Articulo.objects.get(pk=pk)
