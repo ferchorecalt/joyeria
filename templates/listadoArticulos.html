@@ -109,18 +109,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </thead>
                             <tbody>
                                 {% for articulo in articulos %}
-                                <tr>
-                                    <td>{{ articulo.articulo_marca.nombre }}</td>
-                                    <td>{{ articulo.modelo }}</td>
-                                    <td>{{ articulo.descripcion }}</td>
-                                    <td>{{ articulo.fecha }}</td>
-                                    <td><img src="{{ articulo.imagen.url}}" alt="imagen del articulo {{ forloop.counter }}"
-                                    width="200" height="100"> </td>
-                                    <td><a href="{% url "editarArticulo" articulo.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
-                                    <td><a href="{% url "eliminarArticulo" articulo.id %}" onclick="return confirm('Seguro que desea eliminar al articulo?')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
+                                    <tr>
+                                        <td>{{ articulo.articulo_marca.nombre }}</td>
+                                        <td>{{ articulo.modelo }}</td>
+                                        <td>{{ articulo.descripcion }}</td>
+                                        <td>{{ articulo.fecha }}</td>
+                                        <td><img src="{{ articulo.imagen.url}}" alt="imagen del articulo {{ forloop.counter }}"
+                                        width="200" height="100"> </td>
+                                        <td><a href="{% url "editarArticulo" articulo.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
+                                        <td><a href="{% url "eliminarArticulo" articulo.id %}" onclick="return confirm('Seguro que desea eliminar al articulo?')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
+                                    </tr>
+                                {% endfor %}
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if articulos.has_previous %}
+                                            <a href="?page={{ articulos.previous_page_number }}">Previa</a>
+                                        {% endif %}
 
-                                </tr>
-                            {% endfor %}
+                                        <span class="current">
+                                            Pagina {{ articulos.number }} de {{ articulos.paginator.num_pages }}.
+                                        </span>
+
+                                        {% if articulos.has_next %}
+                                            <a href="?page={{ articulos.next_page_number }}">Siguiente</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
                             </tbody>
                         </table>
                     </div>

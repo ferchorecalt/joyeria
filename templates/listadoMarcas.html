@@ -12,7 +12,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {% load staticfiles %}
 {# Load the tag library #}
 {% load bootstrap3 %}
-
+    {% load fontawesome %}
+{% fontawesome_stylesheet %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -28,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		/>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script  src="{% static 'js/modernizr.custom.js' %}"></script>
+    <script  src="{% static 'js/filtroMarcas.js' %}"></script>
  <!--start-smoth-scrolling-->
 <script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
 <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
@@ -98,19 +100,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th><a href="?sort=nombred"><i class="fa fa-sort-desc fa-2x"></i></a>Nombre</th>
                                      <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <label>Filtrar nombre:</label><input type="text" id="filtroNombre"/>
                                 {% for marca in marcas %}
-                                <tr>
-                                    <td>{{ marca.nombre }}</td>
-                                    <td><a href="{% url "editarMarca" marca.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
-                                    <td><a href="{% url "eliminarMarca" marca.id %}" onclick="return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
-                                </tr>
-                            {% endfor %}
+                                    <tr>
+                                        <td>{{ marca.nombre }}</td>
+                                        <td><a href="{% url "editarMarca" marca.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
+                                        <td><a href="{% url "eliminarMarca" marca.id %}" onclick="return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
+                                    </tr>
+                                {% endfor %}
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if marcas.has_previous %}
+                                            <a href="?page={{ marcas.previous_page_number }}">Previa</a>
+                                        {% endif %}
+
+                                        <span class="current">
+                                            Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.
+                                        </span>
+
+                                        {% if marcas.has_next %}
+                                            <a href="?page={{ marcas.next_page_number }}">Siguiente</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
                             </tbody>
                         </table>
                     </div>

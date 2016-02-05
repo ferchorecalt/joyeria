@@ -5,8 +5,12 @@ from .models import Marca,Articulo
 from django.template import loader,RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.template.loader import get_template
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+from django.http import JsonResponse
+import json
+from django.template.loader import render_to_string,get_template
 
 # Create your views here.
 
@@ -92,12 +96,44 @@ def editarMarca(request, pk):
 
 @login_required(login_url='login.html')
 def listadoArticulos(request):
-    articulos = Articulo.objects.all()
+    todosLosArticulos = Articulo.objects.order_by('modelo')
+    todasLasPaginas = Paginator(todosLosArticulos, 4)
+    page = request.GET.get('page')
+    try:
+        articulos = todasLasPaginas.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        articulos = todasLasPaginas.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        articulos = todasLasPaginas.page(todasLasPaginas.num_pages)
     return render(request, 'listadoArticulos.html', {'articulos':articulos})
+
+DEFAULT_MARCA_NOMBRE = ''
+DEFAULT_MARCA_SORT = 'nombre'
+VALID_SORTS = {
+    "nombre": "nombre",
+    "nombred": "-nombre",
+}
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):
-    marcas = Marca.objects.all()
+    sort_key = request.GET.get('sort', DEFAULT_MARCA_SORT) # Replace nombre with your default.
+    sort = VALID_SORTS.get(sort_key, DEFAULT_MARCA_SORT)
+    nombre = request.GET.get('nombre', DEFAULT_MARCA_NOMBRE)
+    todasLasMarcas = Marca.objects.filter(nombre__contains=nombre).order_by(sort)
+    todasLasPaginas = Paginator(todasLasMarcas, 4)
+    page = request.GET.get('page')
+    try:
+        marcas = todasLasPaginas.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        marcas = todasLasPaginas.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
+    # if request.is_ajax():
+        #HACER ALGO
     return render(request, 'listadoMarcas.html', {'marcas':marcas})
 
 @login_required(login_url='login.html')
