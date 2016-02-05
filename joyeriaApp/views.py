@@ -6,8 +6,8 @@ from django.template import loader,RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.template.loader import get_template
-from django.core.mail import EmailMessage
-from django.template import Context
+from django.core.mail import send_mail
+
 # Create your views here.
 
 def index(request):
@@ -29,36 +29,17 @@ def articulosParaComprador(request):
 
 def mail(request):
     # return render(request, 'mail.html')
-    form_class = ContactForm
+    form_class = ContactForm()
 
     if request.method == 'POST':
-        form = form_class(data=request.POST)
+        form = ContactForm(request.POST)
 
         if form.is_valid():
-            nombre = request.POST.get('nombre', '')
-            mail = request.POST.get('mail', '')
-            asunto = request.POST.get('asunto', '')
-            mensaje = request.POST.get('mensaje', '')
-
-            # Email the profile with the
-            # contact information
-            template =get_template('contact_template.txt')
-            context = Context({
-                'nombre': nombre,
-                'mail': mail,
-                'asunto': asunto,
-                'mensaje': mensaje,
-            })
-            content = template.render(context)
-
-            email = EmailMessage(
-                asunto,
-                content,
-                mail,
-                ['ilanrosenfeld7@gmail.com'],
-                headers = {'Reply-To': mail }
-            )
-            email.send()
+            nombre = form.cleaned_data['nombre']
+            mail = form.cleaned_data['mail']
+            asunto = form.cleaned_data['asunto']
+            mensaje = form.cleaned_data['mensaje']
+            send_mail(asunto, mensaje, mail, ['ferchorecalt@gmail.com'])
             return redirect('mail')
     return render(request, 'mail.html', {
         'form': form_class,
