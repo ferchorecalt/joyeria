@@ -45,3 +45,11 @@ class MarcaForm(forms.ModelForm):
                 },
             }
 
+class ContactForm(forms.Form):
+    nombre = forms.CharField(required=True)
+    mail = forms.EmailField(required=True)
+    asunto = forms.CharField(required=True)
+    mensaje = forms.CharField(
+        required=True,
+        widget=forms.Textarea
+    )
