@@ -37,13 +37,18 @@ class ArticuloForm(forms.ModelForm):
 class MarcaForm(forms.ModelForm):
     class Meta:
             model = Marca
-            fields = ('nombre',)
+            # fields = ('nombre',)
+            fields = '__all__'
             error_messages = {
                 'nombre': {
                     'unique': "El nombre de la marca ya existe!",
                     'required':'Debe ingresar un nombre de marca!',
                 },
             }
+    def __init__(self, *args, **kwargs):
+        super(MarcaForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.error_messages = {'required':'El campo {fieldname} es requerido'.format(fieldname=field.label)}
 
 class ContactForm(forms.Form):
     nombre = forms.CharField(required=True)

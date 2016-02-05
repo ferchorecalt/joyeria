@@ -22,6 +22,11 @@ def services(request):
 def news(request):
     return render(request, 'news.html')
 
+def articulosParaComprador(request):
+    # articulos = Articulo.objects.all()
+    marcas = Marca.objects.all()
+    return render(request, 'articulosParaComprador.html', {'marcas':marcas})
+
 def mail(request):
     # return render(request, 'mail.html')
     form_class = ContactForm
@@ -112,11 +117,11 @@ def listadoMarcas(request):
 @login_required(login_url='login.html')
 def crear_marca(request):
     if request.method == 'POST':
-        marca_form = MarcaForm(request.POST)
+        marca_form = MarcaForm(request.POST, request.FILES)
         if marca_form.is_valid():
             marca = marca_form.save()
             # return HttpResponse('Guardado correctamente')
-            marca_form=MarcaForm()
+            return redirect('listadoMarcas')
     else:
         marca_form = MarcaForm()
 

@@ -6,6 +6,8 @@ from django.db import models
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=30, unique=True)
+    imagen = models.ImageField(upload_to='%Y/%m/%d')
+    descripcion = models.CharField(max_length=500) #De ultima, si no tienen, la deja en blanco
     def __str__(self):
         return '%s' % (self.nombre)
 
