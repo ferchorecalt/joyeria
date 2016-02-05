@@ -24,7 +24,7 @@ def news(request):
 
 def articulosParaComprador(request):
     # articulos = Articulo.objects.all()
-    marcas = Marca.objects.all()
+    marcas = Marca.objects.order_by('nombre')
     return render(request, 'articulosParaComprador.html', {'marcas':marcas})
 
 def mail(request):
