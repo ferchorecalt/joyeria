@@ -64,8 +64,13 @@ def mail(request):
         'form': form_class,
     })
 
-def single(request):
-    return render(request, 'single.html')
+def single(request, pk):
+    articulo = Articulo.objects.get(pk=pk)
+    return render(request, 'single.html', {'articulo':articulo})
+
+def singleMarca(request, pk):
+    marca = Marca.objects.get(pk=pk)
+    return render(request, 'singleMarca.html', {'marca':marca})
 
 @login_required(login_url='login.html')
 def editarArticulo(request, pk):

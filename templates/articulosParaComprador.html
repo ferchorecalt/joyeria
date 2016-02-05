@@ -71,10 +71,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 {% else %}
                                     <li class="nae"><a href="index"><p><span class="glyphicon glyphicon-home"></span></p>Inicio</a></li>
                                       <li class="nae"><a href="gallery"><p ><span class="glyphicon glyphicon-picture"></span></p>Galeria</a></li>
-                                    <li class="nae"><a href="articulosParaComprador"><p ><span class="glyphicon glyphicon-tint"></span></p>Articulos</a></li>
+                                    <li class="nae"><a href="articulosParaComprador"><p class="active"><span class="glyphicon glyphicon-tint"></span></p>Articulos</a></li>
                                     <li class="nae"><a href="404"><p ><span class="glyphicon glyphicon-folder-close"></span></p>Servicios</a></li>
                                      <li class="nae"><a href="news"><p><span class="glyphicon glyphicon-list-alt"></span></p>Novedades</a></li>
-                                    <li class="nae"><a href="mail" ><p class="active"><span class="glyphicon glyphicon-envelope"></span></p>Contactanos</a></li>
+                                    <li class="nae"><a href="mail" ><p ><span class="glyphicon glyphicon-envelope"></span></p>Contactanos</a></li>
                                     <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-lock"></span></p>Ingresar</a></li>
                                 {% endif %}
                             </ul>
@@ -99,9 +99,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                  <div class="collection-main">
                                     <div class="col-md-4 collection-text">
                                         <h2>{{ marca.nombre }}</h2>
-                                        <h4><img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}" width="200" height="100"> </h4>
+                                        <h4><img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}" width="270" height="130"> </h4>
                                         <p>{{ marca.descripcion }}</p>
-                                            <a class="read" href="single.html">Read More</a>
+                                            <a class="read" href="{% url "singleMarca" marca.id %}">Detalles de la Marca</a>
                                     </div>
                                     <div class="col-md-8 collection-images">
                                         <h3>Coleccion {{ marca.nombre }}</h3>
@@ -109,9 +109,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         {% if marca.articulo_set.all %}
                                             {% for articulo in marca.articulo_set.all %}
                                                 <div class="col-md-4 collection-images-grid">
-                                                    <img src="{{ articulo.imagen.url}}" alt="imagen de articulo {{ forloop.counter }} de {{ marca.nombre }}" width="150" height="80">
+                                                    <img src="{{ articulo.imagen.url}}" style="margin-top: 30px;" alt="imagen de articulo {{ forloop.counter }} de {{ marca.nombre }}" width="200" height="150">
                                                     <h4>{{ articulo.modelo }}</h4>
-                                                    <a class="read one" href="single.html">More</a>
+                                                    <a class="read one" href="{% url "single" articulo.id %}"> Leer mas</a>
                                                 </div>
                                             {% endfor %}
                                         {%  else %}
