@@ -93,6 +93,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="Contact">
             <h3>Listado de Articulos Disponibles </h3>
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
+                    <div class="pagination">
+                                                <span class="step-links">
+                                                    {% if marcas.has_previous %}
+                                                        <a href="?page={{ marcas.previous_page_number }}">Previa</a>
+                                                    {% endif %}
+
+                                                    <span class="current">
+                                                        Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.
+                                                    </span>
+
+                                                    {% if marcas.has_next %}
+                                                        <a href="?page={{ marcas.next_page_number }}">Siguiente</a>
+                                                    {% endif %}
+                                                </span>
+                    </div>
                     {% for marca in marcas %}
                         <div class="collection-section wow bounceInLeft" data-wow-delay="0.4s">
                             <div class="container">
@@ -105,7 +120,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     <div class="col-md-8 collection-images">
                                         <h3>Coleccion {{ marca.nombre }}</h3>
-
                                         {% if marca.articulo_set.all %}
                                             {% for articulo in marca.articulo_set.all %}
                                                 <div class="col-md-4 collection-images-grid">

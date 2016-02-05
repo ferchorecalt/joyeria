@@ -26,11 +26,6 @@ def services(request):
 def news(request):
     return render(request, 'news.html')
 
-def articulosParaComprador(request):
-    # articulos = Articulo.objects.all()
-    marcas = Marca.objects.order_by('nombre')
-    return render(request, 'articulosParaComprador.html', {'marcas':marcas})
-
 def mail(request):
     # return render(request, 'mail.html')
     form_class = ContactForm()
@@ -115,6 +110,21 @@ VALID_SORTS = {
     "nombre": "nombre",
     "nombred": "-nombre",
 }
+
+def articulosParaComprador(request):
+    # articulos = Articulo.objects.all()
+    todasLasMarcas = Marca.objects.order_by('nombre')
+    todasLasPaginas = Paginator(todasLasMarcas, 3)
+    page = request.GET.get('page')
+    try:
+        marcas = todasLasPaginas.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        marcas = todasLasPaginas.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
+    return render(request, 'articulosParaComprador.html', {'marcas':marcas})
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):
