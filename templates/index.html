@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {# Load the tag library #}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 {% load bootstrap3 %}
+{% load i18n %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
@@ -116,6 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"></div>
 						<div class="navigation">
 							<ul class="navig">
+                            {{ LANGUAGE_CODE }}
 								{% if user.is_authenticated %}
                                     <li class="nae"><a href="listadoArticulos"><p ><span class="glyphicon glyphicon-list"></span></p>Listado Articulos</a></li>
                                     <li class="nae"><a href="listadoMarcas"><p><span class="glyphicon glyphicon-list"></span></p>Listado Marcas</a></li>
@@ -123,13 +125,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <li class="nae"><a href="crearMarca"><p><span class="glyphicon glyphicon-pencil"></span></p>Nueva Marca</a></li>
                                     <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
                                 {% else %}
-                                    <li class="nae"><a href="index"><p class="active"><span class="glyphicon glyphicon-home"></span></p>Inicio</a></li>
-                                    <li class="nae"><a href="gallery"><p ><span class="glyphicon glyphicon-picture"></span></p>Galeria</a></li>
-                                    <li class="nae"><a href="articulosParaComprador"><p ><span class="glyphicon glyphicon-tint"></span></p>Articulos</a></li>
-                                    <li class="nae"><a href="404"><p ><span class="glyphicon glyphicon-folder-close"></span></p>Servicios</a></li>
-                                     <li class="nae"><a href="news"><p ><span class="glyphicon glyphicon-list-alt"></span></p>Novedades</a></li>
-                                    <li class="nae"><a href="mail" ><p ><span class="glyphicon glyphicon-envelope"></span></p>Contactanos</a></li>
-                                    <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-lock"></span></p>Ingresar</a></li>
+                                    <li class="nae"><a href="index"><p class="active"><span class="glyphicon glyphicon-home"></span></p>{% trans "inicio" %}</a></li>
+                                    <li class="nae"><a href="gallery"><p ><span class="glyphicon glyphicon-picture"></span></p>{% trans "galeria" %}</a></li>
+                                    <li class="nae"><a href="articulosParaComprador"><p ><span class="glyphicon glyphicon-tint"></span></p>{% trans "articulos" %}</a></li>
+                                    <li class="nae"><a href="404"><p ><span class="glyphicon glyphicon-folder-close"></span></p>{% trans "servicios" %}</a></li>
+                                     <li class="nae"><a href="news"><p ><span class="glyphicon glyphicon-list-alt"></span></p>{% trans "novedades" %}</a></li>
+                                    <li class="nae"><a href="mail" ><p ><span class="glyphicon glyphicon-envelope"></span></p>{% trans "contactanos" %}</a></li>
+                                    <li class="nae"><a href="login"><p><span class="glyphicon glyphicon-lock"></span></p>{% trans "ingresar" %}</a></li>
                                 {% endif %}
                             </ul>
 						</div>

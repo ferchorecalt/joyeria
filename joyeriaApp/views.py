@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.utils.translation import ugettext_lazy as _
 from django.http import JsonResponse
 import json
 from django.template.loader import render_to_string,get_template
@@ -15,6 +16,8 @@ from django.template.loader import render_to_string,get_template
 # Create your views here.
 
 def index(request):
+    # context = RequestContext(request)
+    # context['text'] = _("Welcome to Pythonizame");
     return render(request, 'index.html')
 
 def gallery(request):
