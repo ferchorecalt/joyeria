@@ -11,6 +11,8 @@ from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.http import JsonResponse
 import json
+import sys
+from django.core import serializers
 from django.template.loader import render_to_string,get_template
 
 # Create your views here.
@@ -109,6 +111,7 @@ def listadoArticulos(request):
 
 DEFAULT_MARCA_NOMBRE = ''
 DEFAULT_MARCA_SORT = 'nombre'
+DEFAULT_MARCA_CANTIDAD = 5
 VALID_SORTS = {
     "nombre": "nombre",
     "nombred": "-nombre",
@@ -131,23 +134,30 @@ def articulosParaComprador(request):
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):
-    sort_key = request.GET.get('sort', DEFAULT_MARCA_SORT) # Replace nombre with your default.
-    sort = VALID_SORTS.get(sort_key, DEFAULT_MARCA_SORT)
-    nombre = request.GET.get('nombre', DEFAULT_MARCA_NOMBRE)
-    todasLasMarcas = Marca.objects.filter(nombre__contains=nombre).order_by(sort)
-    todasLasPaginas = Paginator(todasLasMarcas, 4)
-    page = request.GET.get('page')
-    try:
-        marcas = todasLasPaginas.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        marcas = todasLasPaginas.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
-    # if request.is_ajax():
-        #HACER ALGO
-    return render(request, 'listadoMarcas.html', {'marcas':marcas})
+        sort_key = request.GET.get('sort', DEFAULT_MARCA_SORT) # Replace nombre with your default.
+        sort = VALID_SORTS.get(sort_key, DEFAULT_MARCA_SORT)
+        nombre = request.GET.get('nombre', DEFAULT_MARCA_NOMBRE)
+        cantidad = request.GET.get('cantidad', DEFAULT_MARCA_CANTIDAD)
+        todasLasMarcas = Marca.objects.filter(nombre__icontains=nombre).order_by(sort)  #la 'i' antes del contains lo hace no case sensitive
+        todasLasPaginas = Paginator(todasLasMarcas, cantidad)
+        page = request.GET.get('page')
+        try:
+            marcas = todasLasPaginas.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            page=1
+            marcas = todasLasPaginas.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
+            # if request.is_ajax():
+            #HACER ALGO
+        if request.is_ajax():
+            data = serializers.serialize("json", marcas)
+            return HttpResponse(data, content_type='application/json')
+        return render(request, 'listadoMarcas.html', {'marcas':marcas,'cantidadPaginas':todasLasPaginas.num_pages,
+                                                      'paginaActual':page})
+
 
 @login_required(login_url='login.html')
 def crear_marca(request):

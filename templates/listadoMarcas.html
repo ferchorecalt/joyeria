@@ -44,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--start-smoth-scrolling-->
 <!--animated-css-->
 		<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'css/listados.css' %}" rel="stylesheet" type="text/css" media="all">
 		<script src="{% static 'js/wow.min.js' %}" ></script>
 		<script>
 		 new WOW().init();
@@ -95,9 +96,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
                     <h3>LISTADO DE MARCAS</h3>
-
+                    <div class="text-center">
+                        <label>Marcas por Pagina:</label>
+                        <select id="marcasPorPagina">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>15</option>
+                        </select>
+                        <label>Filtrar nombre:</label><input type="text" id="filtroNombre"/>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="tablaMarcas">
                             <thead>
                                 <tr>
                                     <th><a href="?sort=nombred"><i class="fa fa-sort-desc fa-2x"></i></a>Nombre</th>
@@ -106,31 +115,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </tr>
                             </thead>
                             <tbody>
-                                <label>Filtrar nombre:</label><input type="text" id="filtroNombre"/>
+
                                 {% for marca in marcas %}
-                                    <tr>
-                                        <td>{{ marca.nombre }}</td>
-                                        <td><a href="{% url "editarMarca" marca.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
-                                        <td><a href="{% url "eliminarMarca" marca.id %}" onclick="return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ marca.nombre }}</td>
+                                            <td><a href="{% url "editarMarca" marca.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
+                                            <td><a href="{% url "eliminarMarca" marca.id %}" onclick="return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
+                                        </tr>
                                 {% endfor %}
-                                <div class="pagination">
-                                    <span class="step-links">
-                                        {% if marcas.has_previous %}
-                                            <a href="?page={{ marcas.previous_page_number }}">Previa</a>
-                                        {% endif %}
-
-                                        <span class="current">
-                                            Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.
-                                        </span>
-
-                                        {% if marcas.has_next %}
-                                            <a href="?page={{ marcas.next_page_number }}">Siguiente</a>
-                                        {% endif %}
-                                    </span>
-                                </div>
+{#                                <div class="pagination">#}
+{#                                    <span class="step-links">#}
+{#                                        {% if marcas.has_previous %}#}
+{#                                            <a href="?page={{ marcas.previous_page_number }}">Previa</a>#}
+{#                                        {% endif %}#}
+{##}
+{#                                        <span class="current">#}
+{#                                            Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.#}
+{#                                        </span>#}
+{##}
+{#                                        {% if marcas.has_next %}#}
+{#                                            <a href="?page={{ marcas.next_page_number }}">Siguiente</a>#}
+{#                                        {% endif %}#}
+{#                                    </span>#}
+{#                                </div>#}
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" id="previa">Previa</button>
+                        <label>Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
+                        <button type="button" id="siguiente">Siguiente</button>
                     </div>
 			    </div>
         </div>
