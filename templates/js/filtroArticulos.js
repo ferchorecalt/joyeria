@@ -1,8 +1,27 @@
  $(document).ready(function() {
 
      var page=1;
-     var orden="modelo";
+     var orden="articulo_marca__nombre";
+     var ordenMarca="ASC";
+     var ordenModelo="ASC";
+     var ordenDescripcion="ASC";
+     var ordenFecha="ASC";
+
+     var viendoFiltros=true;
      habYdeshabBotones(page, $("#cantidadPaginas").val());
+
+     $("#modoFiltros").click(function(){
+        if(viendoFiltros){
+            viendoFiltros=false;
+            $("#filtros").hide();
+            $("#textoModoFiltros").text("Ver Filtros");
+        }else{
+            viendoFiltros=true;
+            $("#filtros").show();
+            $("#filtros").css("visibility","visible");
+            $("#textoModoFiltros").text("Ocultar Filtros");
+        }
+     });
 
      $("#filtroMarca").keyup(function(e){
         e.preventDefault();
@@ -23,13 +42,55 @@
      });
 
      $("#articulosPorPagina").change(function(){
+        page=1;
         llamadoAjax();
      });
 
-     $("#tablaArticulos").on("click","#ordenarPorNombre",function(){
-         if($("#ordenarPorNombre").attr('name').indexOf("ASC")>-1)
-             orden="-nombre";
-         else orden="nombre";
+     $("#tablaArticulos").on("click","#ordenarPorMarca",function(){
+         if($("#ordenarPorMarca").attr('name').indexOf("ASC")>-1){
+             orden="-articulo_marca__nombre";
+             ordenMarca="DESC";
+         }
+         else{
+             orden="articulo_marca__nombre";
+             ordenMarca="ASC";
+         }
+         llamadoAjax();
+     });
+
+     $("#tablaArticulos").on("click","#ordenarPorModelo",function(){
+         if($("#ordenarPorModelo").attr('name').indexOf("ASC")>-1){
+             orden="-modelo";
+             ordenModelo="DESC";
+         }
+         else{
+             orden="modelo";
+             ordenModelo="ASC";
+         }
+         llamadoAjax();
+     });
+
+     $("#tablaArticulos").on("click","#ordenarPorDescripcion",function(){
+         if($("#ordenarPorDescripcion").attr('name').indexOf("ASC")>-1){
+             orden="-descripcion";
+             ordenDescripcion="DESC";
+         }
+         else{
+             orden="descripcion";
+             ordenDescripcion="ASC";
+         }
+         llamadoAjax();
+     });
+
+     $("#tablaArticulos").on("click","#ordenarPorFecha",function(){
+         if($("#ordenarPorFecha").attr('name').indexOf("ASC")>-1){
+             orden="-fecha";
+             ordenFecha="DESC";
+         }
+         else{
+             orden="fecha";
+             ordenFecha="ASC";
+         }
          llamadoAjax();
      });
 
@@ -81,24 +142,18 @@
                      $("#tablaArticulos").css('visibility', 'visible');
                      myNode.innerHTML = '';
                      var nuevoHtml = "<thead><tr>";
-
-                     //if(data["orden"]=="nombre")
-                     //    nuevoHtml = nuevoHtml.concat("<th><button class='btn btn-warning btn-sm' id='ordenarPorNombre' name='ASC'><i class='fa fa-sort-asc fa-2x'></i></button>Nombre</th>");
-                     //else nuevoHtml = nuevoHtml.concat("<th><button class='btn btn-warning btn-sm' id='ordenarPorNombre' name='DESC'><i class='fa fa-sort-desc fa-2x'></i></button>Nombre</th>");
-
-                     nuevoHtml = nuevoHtml.concat("<th><button class='btn btn-warning btn-sm' id='ordenarPorMarca' name='ASC'><i class='fa fa-sort-asc fa-2x' id='iconoOrdenMarca'></i></button> Marca</th>" +
-                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorModelo' name='ASC'><i class='fa fa-sort-asc fa-2x' id='iconoOrdenModelo'></i></button>Modelo</th>" +
-                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorDescripcion' name='ASC'><i class='fa fa-sort-asc fa-2x' id='iconoOrdenDescripcion'></i></button>Descripcion</th>" +
-                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorFecha' name='ASC'><i class='fa fa-sort-asc fa-2x' id='iconoOrdenFecha'></i></button>Fecha</th>" +
+                     nuevoHtml = nuevoHtml.concat("<th><button class='btn btn-warning btn-sm' id='ordenarPorMarca' name='"+ordenMarca+"'><i class='fa fa-sort-"+ordenMarca.toLocaleLowerCase()+" fa-2x' id='iconoOrdenMarca'></i></button> Marca</th>" +
+                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorModelo' name='"+ordenModelo+"'><i class='fa fa-sort-"+ordenModelo.toLocaleLowerCase()+" fa-2x' id='iconoOrdenModelo'></i></button>Modelo</th>" +
+                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorDescripcion' name='"+ordenDescripcion+"'><i class='fa fa-sort-"+ordenDescripcion.toLocaleLowerCase()+" fa-2x' id='iconoOrdenDescripcion'></i></button>Descripcion</th>" +
+                                                  "<th><button class='btn btn-warning btn-sm' id='ordenarPorFecha' name='"+ordenFecha+"'><i class='fa fa-sort-"+ordenFecha.toLocaleLowerCase()+" fa-2x' id='iconoOrdenFecha'></i></button>Fecha</th>" +
                                                   "<th>Imagen</th><th>Editar</th><th>Eliminar</th></tr></thead><tbody>");
                      for (var i = 0; i < articulos.length; i++) {
                          nuevoHtml = nuevoHtml.concat("<tr>");
-                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fields.articulo_marca.nombre + "</td>");
-                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fields.modelo + "</td>");
-                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fields.descripcion + "</td>");
-                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fields.fecha + "</td>");
-                         //EN LO SIGUIENTE HARCODEO EL /IMAGENES.. VER SI SE PUEDE CORREGIR
-                         nuevoHtml = nuevoHtml.concat("<td> <img src='/imagenes/"+articulos[i].fields.imagen+"' alt='imagen del articulo "+i+"' width='200' height='100'> </td>");
+                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].nombre_marca + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].modelo + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].descripcion + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fecha + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td> <img src='"+articulos[i].imagen+"' alt='imagen del articulo "+i+"' width='200' height='100'> </td>");
                          nuevoHtml = nuevoHtml.concat("<td><a href='editarArticulo/"+articulos[i].pk+"'><p><span class='glyphicon glyphicon-pencil'></span></p></a></td>");
                          nuevoHtml = nuevoHtml.concat("<td><a href='eliminarArticulo/"+articulos[i].pk+"' onclick='return confirm('Seguro que desea eliminar al articulo?')'><p><span class='glyphicon glyphicon-remove'></span></p></a></td>");
                          nuevoHtml = nuevoHtml.concat("</tr>");

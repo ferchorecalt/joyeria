@@ -96,7 +96,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
                     <h3>LISTADO DE ARTICULOS</h3>
+                    <hr>
                     <div class="text-center">
+                        <button type="button" id="modoFiltros" class="btn btn-info">
+                            <label id="textoModoFiltros">Ocultar Filtros</label>
+                        </button>
+                    </div>
+                    <div class="text-center" id="filtros">
                         <label>Articulos por Pagina:</label>
                         <select id="articulosPorPagina">
                                 <option>5</option>
@@ -107,6 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <label>Filtrar modelo:</label><input type="text" id="filtroModelo"/>
                         <label>Filtrar descripcion:</label><input type="text" id="filtroDescripcion"/>
                     </div>
+                    <hr>
                     <div class="table-responsive">
                         <table class="table" id="tablaArticulos">
                             <thead>

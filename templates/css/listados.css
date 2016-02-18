@@ -8,3 +8,7 @@
 #ordenarPorNombre,#ordenarPorMarca,#ordenarPorModelo,#ordenarPorDescripcion,#ordenarPorFecha{
     margin-right: 5px;
 }
+#filtros{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

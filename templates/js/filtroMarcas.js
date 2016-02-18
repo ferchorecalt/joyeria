@@ -2,7 +2,21 @@
 
      var page=1;
      var orden="nombre";
+     var viendoFiltros=true;
      habYdeshabBotones(page, $("#cantidadPaginas").val());
+
+     $("#modoFiltros").click(function(){
+        if(viendoFiltros){
+            viendoFiltros=false;
+            $("#filtros").hide();
+            $("#textoModoFiltros").text("Ver Filtros");
+        }else{
+            viendoFiltros=true;
+            $("#filtros").show();
+            $("#filtros").css("visibility","visible");
+            $("#textoModoFiltros").text("Ocultar Filtros");
+        }
+     });
 
      $("#filtroNombre").keyup(function(e){
         e.preventDefault();
@@ -11,7 +25,8 @@
      });
 
      $("#marcasPorPagina").change(function(){
-        llamadoAjax();
+         page=1;
+         llamadoAjax();
      });
 
      $("#tablaMarcas").on("click","#ordenarPorNombre",function(){

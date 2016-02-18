@@ -98,9 +98,8 @@ DEFAULT_MARCA_NOMBRE = ''
 DEFAULT_MARCA_CANTIDAD = 5
 DEFAULT_MARCA_ORDEN = 'nombre'
 
-DEFAULT_ARTICULO_ORDEN = 'modelo'
+DEFAULT_ARTICULO_ORDEN = 'articulo_marca__nombre'
 DEFAULT_ARTICULO_CANTIDAD = 5
-
 def articulosParaComprador(request):
     # articulos = Articulo.objects.all()
     todasLasMarcas = Marca.objects.order_by('nombre')
@@ -130,6 +129,7 @@ def listadoArticulos(request):
         todosLosArticulos = todosLosArticulos.filter(modelo__icontains=filtroModelo)
     if(filtroDescripcion is not None):
         todosLosArticulos = todosLosArticulos.filter(descripcion__icontains=filtroDescripcion)
+
     todasLasPaginas = Paginator(todosLosArticulos, cantidad)
     page = request.GET.get('page')
     try:
@@ -142,15 +142,19 @@ def listadoArticulos(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         articulos = todasLasPaginas.page(todasLasPaginas.num_pages)
     if request.is_ajax():
-            data = serializers.serialize("json", articulos)
-            # cantPaginas = todasLasPaginas.num_pages
+            # data = serializers.serialize("json", articulos)
+            data = map(lambda x: x.what_i_need_in_ajax_call(),  articulos)
             return HttpResponse(json.dumps({
-                                    "articulos": data,
+                                    "articulos": json.dumps(list(data), default=date_handler),
                                     "cantPaginas": todasLasPaginas.num_pages,
                                     "page": page,
                                     "orden": orden}),
                    content_type='application/json')
-    return render(request, 'listadoArticulos.html', {'articulos':articulos})
+    return render(request, 'listadoArticulos.html', {'articulos':articulos,'cantidadPaginas':todasLasPaginas.num_pages,
+                                                      'paginaActual':page})
+
+def date_handler(obj): #USADO PARA SERIALIZAR FECHA EN JSON
+    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):

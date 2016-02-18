@@ -17,3 +17,12 @@ class Articulo(models.Model):
     fecha = models.DateTimeField(auto_now_add =True)
     imagen = models.ImageField(upload_to='%Y/%m/%d')
     articulo_marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
+    def what_i_need_in_ajax_call(self):
+        return {
+            "modelo": self.modelo,
+            "descripcion": self.descripcion,
+            "fecha" : self.fecha.date(),
+            "imagen" : self.imagen.url,
+            "nombre_marca": self.articulo_marca.nombre,
+            "pk": self.id
+        }
