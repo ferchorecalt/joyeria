@@ -6,6 +6,9 @@
      var ordenModelo="ASC";
      var ordenDescripcion="ASC";
      var ordenFecha="ASC";
+     //document.getElementById('filtroFechaDesde').value= "";
+     //document.getElementById('filtroFechaHasta').value = "";
+     $("input[type=date][id$=filtroFechaDesde]").val('');
 
      var viendoFiltros=true;
      habYdeshabBotones(page, $("#cantidadPaginas").val());
@@ -44,6 +47,18 @@
      $("#articulosPorPagina").change(function(){
         page=1;
         llamadoAjax();
+     });
+
+     $("#filtroFechaDesde").change(function(e){
+         e.preventDefault();
+         page=1;
+         llamadoAjax();
+     });
+
+     $("#filtroFechaHasta").change(function(e){
+         e.preventDefault();
+         page=1;
+         llamadoAjax();
      });
 
      $("#tablaArticulos").on("click","#ordenarPorMarca",function(){
@@ -115,6 +130,8 @@
          var filtroMarca= $("#filtroMarca").val();
          var filtroModelo= $("#filtroModelo").val();
          var filtroDescripcion= $("#filtroDescripcion").val();
+         var filtrofechaDesde= $("#filtrofechaDesde").val();
+         var filtroFechaHasta= $("#filtroFechaHasta").val();
          var cantidad= $("#articulosPorPagina").val();
          $.ajax({
              url: 'listadoArticulos',
@@ -124,6 +141,8 @@
                  filtroMarca: filtroMarca,
                  filtroModelo: filtroModelo,
                  filtroDescripcion: filtroDescripcion,
+                 filtrofechaDesde: filtrofechaDesde,
+                 filtroFechaHasta: filtroFechaHasta,
                  cantidad: cantidad,
                  page: page,
                  orden: orden,
@@ -134,10 +153,9 @@
                  habYdeshabBotones(data["page"],data["cantPaginas"]);
                  var articulos = JSON.parse(data["articulos"]);
                  var myNode = document.getElementById("tablaArticulos");
-
                  if(articulos.length == 0){
                      $("#tablaArticulos").hide();
-                     $("#infoPagActual").text("Ningun articulo posee '"+filtro+"' en su "+tipoFiltro);
+                     $("#infoPagActual").text("Ningun articulo posee tales filtros");
                  }
                  else{
                      $("#tablaArticulos").show();

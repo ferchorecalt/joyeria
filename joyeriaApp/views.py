@@ -120,15 +120,19 @@ def listadoArticulos(request):
     filtroMarca = request.GET.get('filtroMarca')
     filtroModelo = request.GET.get('filtroModelo')
     filtroDescripcion = request.GET.get('filtroDescripcion')
+    filtrofechaDesde = request.GET.get('filtrofechaDesde')
+    filtroFechaHasta = request.GET.get('filtroFechaHasta')
     cantidad = request.GET.get('cantidad', DEFAULT_ARTICULO_CANTIDAD)
     orden = request.GET.get('orden', DEFAULT_ARTICULO_ORDEN)
-    todosLosArticulos = Articulo.objects.order_by(orden)  #la 'i' antes del contains lo hace no case sensitive
+    todosLosArticulos = Articulo.objects.order_by(orden)
     if(filtroMarca is not None):
         todosLosArticulos = todosLosArticulos.filter(articulo_marca__nombre__icontains=filtroMarca)
     if(filtroModelo is not None):
         todosLosArticulos = todosLosArticulos.filter(modelo__icontains=filtroModelo)
     if(filtroDescripcion is not None):
         todosLosArticulos = todosLosArticulos.filter(descripcion__icontains=filtroDescripcion)
+    if( (filtrofechaDesde is not None) & (filtroFechaHasta is not None)):
+        todosLosArticulos = todosLosArticulos.filter(fecha__range=(filtrofechaDesde, filtroFechaHasta))
 
     todasLasPaginas = Paginator(todosLosArticulos, cantidad)
     page = request.GET.get('page')
