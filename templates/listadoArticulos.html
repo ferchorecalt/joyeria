@@ -12,7 +12,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {% load staticfiles %}
 {# Load the tag library #}
 {% load bootstrap3 %}
-
+{% load fontawesome %}
+{% fontawesome_stylesheet %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -27,7 +28,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"
 		/>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<script  src="{% static 'js/modernizr.custom.js' %}"></script>
+{#<script  src="{% static 'js/modernizr.custom.js' %}"></script>#}
+<script  src="{% static 'js/filtroArticulos.js' %}"></script>
  <!--start-smoth-scrolling-->
 <script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
 <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
@@ -94,15 +96,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
                     <h3>LISTADO DE ARTICULOS</h3>
-
+                    <div class="text-center">
+                        <label>Articulos por Pagina:</label>
+                        <select id="articulosPorPagina">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                        </select>
+                        <label>Filtrar marca:</label><input type="text" id="filtroMarca"/>
+                        <label>Filtrar modelo:</label><input type="text" id="filtroModelo"/>
+                        <label>Filtrar descripcion:</label><input type="text" id="filtroDescripcion"/>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="tablaArticulos">
                             <thead>
                                 <tr>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Descripcion</th>
-                                    <th>Fecha</th>
+                                    <th><button class="btn btn-warning btn-sm" id="ordenarPorMarca" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenMarca"></i></button> Marca</th>
+                                    <th><button class="btn btn-warning btn-sm" id="ordenarPorModelo" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenModelo"></i></button>Modelo</th>
+                                    <th><button class="btn btn-warning btn-sm" id="ordenarPorDescripcion" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenDescripcion"></i></button>Descripcion</th>
+                                    <th><button class="btn btn-warning btn-sm" id="ordenarPorFecha" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenFecha"></i></button>Fecha</th>
                                     <th>Imagen</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
@@ -121,25 +133,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <td><a href="{% url "eliminarArticulo" articulo.id %}" onclick="return confirm('Seguro que desea eliminar al articulo?')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
                                     </tr>
                                 {% endfor %}
-                                <div class="pagination">
-                                    <span class="step-links">
-                                        {% if articulos.has_previous %}
-                                            <a href="?page={{ articulos.previous_page_number }}">Previa</a>
-                                        {% endif %}
-
-                                        <span class="current">
-                                            Pagina {{ articulos.number }} de {{ articulos.paginator.num_pages }}.
-                                        </span>
-
-                                        {% if articulos.has_next %}
-                                            <a href="?page={{ articulos.next_page_number }}">Siguiente</a>
-                                        {% endif %}
-                                    </span>
-                                </div>
+{#                                <div class="pagination">#}
+{#                                    <span class="step-links">#}
+{#                                        {% if articulos.has_previous %}#}
+{#                                            <a href="?page={{ articulos.previous_page_number }}">Previa</a>#}
+{#                                        {% endif %}#}
+{##}
+{#                                        <span class="current">#}
+{#                                            Pagina {{ articulos.number }} de {{ articulos.paginator.num_pages }}.#}
+{#                                        </span>#}
+{##}
+{#                                        {% if articulos.has_next %}#}
+{#                                            <a href="?page={{ articulos.next_page_number }}">Siguiente</a>#}
+{#                                        {% endif %}#}
+{#                                    </span>#}
+{#                                </div>#}
                             </tbody>
                         </table>
                     </div>
-			    </div>
+                    <div class="text-center">
+                                    <button type="button" id="previa" class="btn btn-warning">Previa</button>
+                                    <label id="infoPagActual">Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
+                                    <button type="button" id="siguiente" class="btn btn-warning">Siguiente</button>
+                                </div>
+                                <input type="hidden" id="cantidadPaginas" value="{{ cantidadPaginas}}"/>
+                    </div>
         </div>
      </div>
 	<!--start-footer-->

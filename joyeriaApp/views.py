@@ -94,24 +94,12 @@ def editarMarca(request, pk):
             # return HttpResponse('Guardado correctamente')
             return redirect('listadoMarcas')
 
-@login_required(login_url='login.html')
-def listadoArticulos(request):
-    todosLosArticulos = Articulo.objects.order_by('modelo')
-    todasLasPaginas = Paginator(todosLosArticulos, 4)
-    page = request.GET.get('page')
-    try:
-        articulos = todasLasPaginas.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        articulos = todasLasPaginas.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        articulos = todasLasPaginas.page(todasLasPaginas.num_pages)
-    return render(request, 'listadoArticulos.html', {'articulos':articulos})
-
 DEFAULT_MARCA_NOMBRE = ''
 DEFAULT_MARCA_CANTIDAD = 5
 DEFAULT_MARCA_ORDEN = 'nombre'
+
+DEFAULT_ARTICULO_ORDEN = 'modelo'
+DEFAULT_ARTICULO_CANTIDAD = 5
 
 def articulosParaComprador(request):
     # articulos = Articulo.objects.all()
@@ -127,6 +115,42 @@ def articulosParaComprador(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
     return render(request, 'articulosParaComprador.html', {'marcas':marcas})
+
+@login_required(login_url='login.html')
+def listadoArticulos(request):
+    filtroMarca = request.GET.get('filtroMarca')
+    filtroModelo = request.GET.get('filtroModelo')
+    filtroDescripcion = request.GET.get('filtroDescripcion')
+    cantidad = request.GET.get('cantidad', DEFAULT_ARTICULO_CANTIDAD)
+    orden = request.GET.get('orden', DEFAULT_ARTICULO_ORDEN)
+    todosLosArticulos = Articulo.objects.order_by(orden)  #la 'i' antes del contains lo hace no case sensitive
+    if(filtroMarca is not None):
+        todosLosArticulos = todosLosArticulos.filter(articulo_marca__nombre__icontains=filtroMarca)
+    if(filtroModelo is not None):
+        todosLosArticulos = todosLosArticulos.filter(modelo__icontains=filtroModelo)
+    if(filtroDescripcion is not None):
+        todosLosArticulos = todosLosArticulos.filter(descripcion__icontains=filtroDescripcion)
+    todasLasPaginas = Paginator(todosLosArticulos, cantidad)
+    page = request.GET.get('page')
+    try:
+        articulos = todasLasPaginas.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        page=1
+        articulos = todasLasPaginas.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        articulos = todasLasPaginas.page(todasLasPaginas.num_pages)
+    if request.is_ajax():
+            data = serializers.serialize("json", articulos)
+            # cantPaginas = todasLasPaginas.num_pages
+            return HttpResponse(json.dumps({
+                                    "articulos": data,
+                                    "cantPaginas": todasLasPaginas.num_pages,
+                                    "page": page,
+                                    "orden": orden}),
+                   content_type='application/json')
+    return render(request, 'listadoArticulos.html', {'articulos':articulos})
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):

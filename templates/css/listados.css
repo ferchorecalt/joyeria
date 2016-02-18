@@ -5,6 +5,6 @@
     margin-right: 10px;
     margin-left: 10px;
 }
-#ordenarPorNombre{
+#ordenarPorNombre,#ordenarPorMarca,#ordenarPorModelo,#ordenarPorDescripcion,#ordenarPorFecha{
     margin-right: 5px;
 }

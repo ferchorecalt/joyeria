@@ -58,7 +58,7 @@
 
                  if(marcas.length == 0){
                      $("#tablaMarcas").hide();
-                     $("#infoPagActual").text("Ninguna marca posee lo ingresado en su nombre");
+                     $("#infoPagActual").text("Ninguna marca posee '"+nombre+"' en su nombre");
                  }
                  else{
                      $("#tablaMarcas").show();
@@ -85,6 +85,7 @@
                          //});
                          nuevoHtml = nuevoHtml.concat("</tr>");
                      }
+
                      document.getElementById("tablaMarcas").innerHTML = nuevoHtml;
                  }
 
