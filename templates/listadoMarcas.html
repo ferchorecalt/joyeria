@@ -109,7 +109,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <table class="table" id="tablaMarcas">
                             <thead>
                                 <tr>
-                                    <th><a href="?sort=nombred"><i class="fa fa-sort-desc fa-2x"></i></a>Nombre</th>
+{#                                    <th><a href="?sort=nombred"><i class="fa fa-sort-desc fa-2x"></i></a>Nombre</th>#}
+                                    <th><button class="btn btn-warning btn-sm" id="ordenarPorNombre" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenNombre"></i></button>Nombre</th>
                                      <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
@@ -142,10 +143,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </table>
                     </div>
                     <div class="text-center">
-                        <button type="button" id="previa">Previa</button>
-                        <label>Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
-                        <button type="button" id="siguiente">Siguiente</button>
+                        <button type="button" id="previa" class="btn btn-warning">Previa</button>
+                        <label id="infoPagActual">Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
+                        <button type="button" id="siguiente" class="btn btn-warning">Siguiente</button>
                     </div>
+                    <input type="hidden" id="cantidadPaginas" value="{{ cantidadPaginas}}"/>
 			    </div>
         </div>
      </div>

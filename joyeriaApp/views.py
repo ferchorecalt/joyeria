@@ -110,12 +110,8 @@ def listadoArticulos(request):
     return render(request, 'listadoArticulos.html', {'articulos':articulos})
 
 DEFAULT_MARCA_NOMBRE = ''
-DEFAULT_MARCA_SORT = 'nombre'
 DEFAULT_MARCA_CANTIDAD = 5
-VALID_SORTS = {
-    "nombre": "nombre",
-    "nombred": "-nombre",
-}
+DEFAULT_MARCA_ORDEN = 'nombre'
 
 def articulosParaComprador(request):
     # articulos = Articulo.objects.all()
@@ -134,11 +130,10 @@ def articulosParaComprador(request):
 
 @login_required(login_url='login.html')
 def listadoMarcas(request):
-        sort_key = request.GET.get('sort', DEFAULT_MARCA_SORT) # Replace nombre with your default.
-        sort = VALID_SORTS.get(sort_key, DEFAULT_MARCA_SORT)
         nombre = request.GET.get('nombre', DEFAULT_MARCA_NOMBRE)
         cantidad = request.GET.get('cantidad', DEFAULT_MARCA_CANTIDAD)
-        todasLasMarcas = Marca.objects.filter(nombre__icontains=nombre).order_by(sort)  #la 'i' antes del contains lo hace no case sensitive
+        orden = request.GET.get('orden', DEFAULT_MARCA_ORDEN)
+        todasLasMarcas = Marca.objects.filter(nombre__icontains=nombre).order_by(orden)  #la 'i' antes del contains lo hace no case sensitive
         todasLasPaginas = Paginator(todasLasMarcas, cantidad)
         page = request.GET.get('page')
         try:
@@ -154,7 +149,13 @@ def listadoMarcas(request):
             #HACER ALGO
         if request.is_ajax():
             data = serializers.serialize("json", marcas)
-            return HttpResponse(data, content_type='application/json')
+            # cantPaginas = todasLasPaginas.num_pages
+            return HttpResponse(json.dumps({
+                                    "marcas": data,
+                                    "cantPaginas": todasLasPaginas.num_pages,
+                                    "page": page,
+                                    "orden": orden}),
+                   content_type='application/json')
         return render(request, 'listadoMarcas.html', {'marcas':marcas,'cantidadPaginas':todasLasPaginas.num_pages,
                                                       'paginaActual':page})
 
