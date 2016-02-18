@@ -41,6 +41,7 @@
             page = page -1;
             llamadoAjax();
          }
+         $("#ordenarPorNombre").focus();
      });
 
      $("#siguiente").click(function(){
@@ -49,6 +50,7 @@
             page = page +1;
             llamadoAjax();
          }
+         $("#ordenarPorNombre").focus();
      });
 
      function llamadoAjax() {

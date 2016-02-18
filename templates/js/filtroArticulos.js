@@ -99,6 +99,7 @@
             page = page -1;
             llamadoAjax();
          }
+         $("#ordenarPorMarca").focus();
      });
 
      $("#siguiente").click(function(){
@@ -107,6 +108,7 @@
             page = page +1;
             llamadoAjax();
          }
+         $("#ordenarPorMarca").focus();
      });
 
      function llamadoAjax() {
