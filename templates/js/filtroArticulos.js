@@ -8,8 +8,12 @@
      var ordenFecha="ASC";
      //document.getElementById('filtroFechaDesde').value= "";
      //document.getElementById('filtroFechaHasta').value = "";
-     $("#filtroFechaDesde").val(new Date(2016,00,01).toISOString().substring(0, 10));
-     $("#filtroFechaHasta").val(new Date().toISOString().substring(0, 10));
+
+     $("#filtroFechaDesde").val("2016-01-01");
+     document.getElementById('filtroFechaHasta').valueAsDate = new Date();
+     //$("#filtroFechaHasta").val(new Date().valueAsDate());
+     //$("#filtroFechaDesde").val(new Date(2016,00,01).toISOString().substring(0, 10));
+     //$("#filtroFechaHasta").val(new Date().toISOString().substring(0, 10));
      var viendoFiltros=true;
      habYdeshabBotones(page, $("#cantidadPaginas").val());
 
@@ -130,8 +134,8 @@
          var filtroMarca= $("#filtroMarca").val();
          var filtroModelo= $("#filtroModelo").val();
          var filtroDescripcion= $("#filtroDescripcion").val();
-         var filtrofechaDesde= $("#filtrofechaDesde").val();
-         var filtroFechaHasta= $("#filtroFechaHasta").val();
+         var filtrofechaDesde= document.getElementById('filtroFechaDesde').value
+         var filtroFechaHasta= document.getElementById('filtroFechaHasta').value
          var cantidad= $("#articulosPorPagina").val();
          $.ajax({
              url: 'listadoArticulos',
