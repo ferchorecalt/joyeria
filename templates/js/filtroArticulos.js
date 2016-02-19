@@ -8,8 +8,8 @@
      var ordenFecha="ASC";
      //document.getElementById('filtroFechaDesde').value= "";
      //document.getElementById('filtroFechaHasta').value = "";
-     $("input[type=date][id$=filtroFechaDesde]").val('');
-
+     $("#filtroFechaDesde").val(new Date(2016,00,01).toISOString().substring(0, 10));
+     $("#filtroFechaHasta").val(new Date().toISOString().substring(0, 10));
      var viendoFiltros=true;
      habYdeshabBotones(page, $("#cantidadPaginas").val());
 
