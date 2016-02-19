@@ -169,7 +169,7 @@
                                                   "<th>Imagen</th><th>Editar</th><th>Eliminar</th></tr></thead><tbody>");
                      for (var i = 0; i < articulos.length; i++) {
                          nuevoHtml = nuevoHtml.concat("<tr>");
-                         nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].nombre_marca + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td><a href='singleMarca/"+articulos[i].id_marca+"'>" + articulos[i].nombre_marca + "</a></td>");
                          nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].modelo + "</td>");
                          nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].descripcion + "</td>");
                          nuevoHtml = nuevoHtml.concat("<td>" + articulos[i].fecha + "</td>");

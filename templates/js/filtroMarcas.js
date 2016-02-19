@@ -92,6 +92,7 @@
                      for (var i = 0; i < marcas.length; i++) {
                          nuevoHtml = nuevoHtml.concat("<tr>");
                          nuevoHtml = nuevoHtml.concat("<td>" + marcas[i].fields.nombre + "</td>");
+                         nuevoHtml = nuevoHtml.concat("<td><a href='singleMarca/"+marcas[i].pk+"'>Ver Articulos</a></td>");
                          nuevoHtml = nuevoHtml.concat("<td><a href='editarMarca/"+marcas[i].pk+"'><p><span class='glyphicon glyphicon-pencil'></span></p></a></td>");
                          nuevoHtml = nuevoHtml.concat("<td><a href='eliminarMarca/"+marcas[i].pk+"'" +
                              " onclick='return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')'>" +

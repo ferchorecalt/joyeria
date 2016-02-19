@@ -118,7 +118,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <tr>
 {#                                    <th><a href="?sort=nombred"><i class="fa fa-sort-desc fa-2x"></i></a>Nombre</th>#}
                                     <th><button class="btn btn-warning btn-sm" id="ordenarPorNombre" name="ASC"><i class="fa fa-sort-asc fa-2x" id="iconoOrdenNombre"></i></button>Nombre</th>
-                                     <th>Editar</th>
+                                    <th>Articulos</th>
+                                    <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
@@ -127,6 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 {% for marca in marcas %}
                                         <tr>
                                             <td>{{ marca.nombre }}</td>
+                                            <td><a href="{% url "singleMarca" marca.id %}">Ver Articulos</a></td>
                                             <td><a href="{% url "editarMarca" marca.id %}"><p><span class="glyphicon glyphicon-pencil"></span></p></a></td>
                                             <td><a href="{% url "eliminarMarca" marca.id %}" onclick="return confirm('Seguro que desea eliminar la marca? Eliminara tambien los articulos que de ella dependen')"><p><span class="glyphicon glyphicon-remove"></span></p></a></td>
                                         </tr>

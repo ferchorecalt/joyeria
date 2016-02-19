@@ -133,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <tbody>
                                 {% for articulo in articulos %}
                                     <tr>
-                                        <td>{{ articulo.articulo_marca.nombre }}</td>
+                                        <td><a href="{% url "singleMarca" articulo.articulo_marca.id %}">{{ articulo.articulo_marca.nombre }}</a></td>
                                         <td>{{ articulo.modelo }}</td>
                                         <td>{{ articulo.descripcion }}</td>
                                         <td>{{ articulo.fecha }}</td>

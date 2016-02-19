@@ -81,6 +81,10 @@
 		<div class="container">
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
 			<h3>Editando Articulo</h3>
+            {#  MUESTRO LA IMAGEN ACTUAL, TARIA BUENO PONERLA AL LADO DE DONDE DICE ACTUALMENTE#}
+            <div class="text-center">
+                <img src="{{ form.instance.imagen.url }} " width="200" height="100"/>
+            </div>
 			<form action="{% url 'editarArticulo' id %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{ form.as_p }}

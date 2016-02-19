@@ -24,5 +24,6 @@ class Articulo(models.Model):
             "fecha" : self.fecha.date(),
             "imagen" : self.imagen.url,
             "nombre_marca": self.articulo_marca.nombre,
+            "id_marca" : self.articulo_marca.id,
             "pk": self.id
         }

@@ -102,7 +102,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="active-page">{{ articulo.modelo }}</li>
 					<div class="clearfix"> </div>
             </ul>
-            <a class="read one" href="../articulosParaComprador">Volver</a>
+            {% if user.is_authenticated %}
+                <a class="read one" href="../listadoArticulos">Volver</a>
+            {% else %}
+                <a class="read one" href="../articulosParaComprador">Volver</a>
+            {% endif %}
+
 			</div>
 
 			<div class="single-page-artical wow bounceIn" data-wow-delay="0.4s">

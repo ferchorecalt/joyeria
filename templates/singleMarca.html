@@ -64,19 +64,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="navigation">
 							<ul class="navig">
 								{% if user.is_authenticated %}
-                                    <li class="nae"><a href="listadoArticulos.html"><i class="crearArticulo"></i><p>Listado Articulos</p><div class="clearfix"></div></a></li>
-                                    <li class="nae"><a href="listadoMarcas.html"><i class="crearMarca"></i><p>Listado Marcas</p><div class="clearfix"></div></a></li>
-                                    <li class="nae"><a href="crearArticulo.html"><i class="crearArticulo"></i><p>Nuevo Articulo</p><div class="clearfix"></div></a></li>
-                                     <li class="nae"><a href="crearMarca.html"><i class="crearMarca"></i><p>Nueva Marca</p><div class="clearfix"></div></a></li>
-                                    <li class="nae"><a href="logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
+                                    <li class="nae"><a href="../listadoArticulos"><p ><span class="glyphicon glyphicon-list"></span></p>Listado Articulos</a></li>
+                                    <li class="nae"><a href="../listadoMarcas"><p class="active"><span class="glyphicon glyphicon-list"></span></p>Listado Marcas</a></li>
+                                    <li class="nae"><a href="../crearArticulo"><p><span class="glyphicon glyphicon-pencil"></span></p>Nuevo Articulo</a></li>
+                                    <li class="nae"><a href="../crearMarca"><p><span class="glyphicon glyphicon-pencil"></span></p>Nueva Marca</a></li>
+                                    <li class="nae"><a href="../logout"><p><span class="glyphicon glyphicon-off"></span></p>Salir de {{ user.get_username }}</a></li>
                                 {% else %}
-                                    <li class="nae"><a href="../index"><p><span class="glyphicon glyphicon-home"></span></p>Inicio</a></li>
-                                      <li class="nae"><a href="../gallery"><p ><span class="glyphicon glyphicon-picture"></span></p>Galeria</a></li>
-                                    <li class="nae"><a href="../articulosParaComprador"><p class="active"><span class="glyphicon glyphicon-tint"></span></p>Articulos</a></li>
-                                    <li class="nae"><a href="../404"><p ><span class="glyphicon glyphicon-folder-close"></span></p>Servicios</a></li>
-                                     <li class="nae"><a href="../news"><p><span class="glyphicon glyphicon-list-alt"></span></p>Novedades</a></li>
-                                    <li class="nae"><a href="../mail" ><p ><span class="glyphicon glyphicon-envelope"></span></p>Contactanos</a></li>
-                                    <li class="nae"><a href="../login"><p><span class="glyphicon glyphicon-lock"></span></p>Ingresar</a></li>
+                                     <li><a href="../index.html"><i class="bag"></i><p>About</p><div class="clearfix"></div></a></li>
+                                    <li class="nab"><a href="../gallery.html"><i class="gallery"></i><p>Gallery</p><div class="clearfix"></div></a></li>
+                                    <li class="naa" ><a href="../404.html"><i class="settings"></i><p>Services</p><div class="clearfix"></div></a></li>
+                                    <li class="nac"><a href="../news.html"><i class="message"></i><p>News</p><div class="clearfix"></div></a></li>
+                                    <li class="nac"><a href="../mail.html"><i class="send"></i><p>Mail Us</p><div class="clearfix"></div></a></li>
+                                    <li class="nae"><a href="../login"><p><span class="glyphicon glyphicon-home"></span></p>Ingresar</a></li>
                                 {% endif %}
                             </ul>
 						</div>
@@ -102,13 +101,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="active-page">{{ marca.nombre }}</li>
 					<div class="clearfix"> </div>
             </ul>
-            <a class="read one" href="../articulosParaComprador">Volver</a>
+            {% if user.is_authenticated %}
+                <a class="read one" href="../listadoArticulos">Volver</a>
+            {% else %}
+                <a class="read one" href="../articulosParaComprador">Volver</a>
+            {% endif %}
 			</div>
 
 			<div class="single-page-artical wow bounceIn" data-wow-delay="0.4s">
 				<div class="artical-content">
 					<h3>{{ marca.nombre }}</h3>
-                    <img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}">
+                    <img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}" width="300" height="230">
 					<p>{{ marca.descripcion }} </p>
                 <div class="clearfix"> </div>
                 <div class="container">
