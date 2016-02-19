@@ -95,15 +95,22 @@ def editarMarca(request, pk):
             return redirect('listadoMarcas')
 
 DEFAULT_MARCA_NOMBRE = ''
-DEFAULT_MARCA_CANTIDAD = 5
+DEFAULT_MARCA_CANTIDAD = 3
 DEFAULT_MARCA_ORDEN = 'nombre'
 
 DEFAULT_ARTICULO_ORDEN = 'articulo_marca__nombre'
 DEFAULT_ARTICULO_CANTIDAD = 5
 def articulosParaComprador(request):
     # articulos = Articulo.objects.all()
+    filtroMarca = request.GET.get('filtroMarca')
+    # filtroModelo = request.GET.get('filtroModelo')
+    cantidad = request.GET.get('cantidad', DEFAULT_MARCA_CANTIDAD)
     todasLasMarcas = Marca.objects.order_by('nombre')
-    todasLasPaginas = Paginator(todasLasMarcas, 3)
+    if(filtroMarca is not None):
+        todasLasMarcas = todasLasMarcas.filter(nombre__icontains=filtroMarca)
+    # if(filtroModelo is not None):
+    #     todasLasMarcas = todasLasMarcas.filter(articulo_set.all().filter(modelo__icontains=filtroModelo))
+    todasLasPaginas = Paginator(todasLasMarcas, cantidad)
     page = request.GET.get('page')
     try:
         marcas = todasLasPaginas.page(page)

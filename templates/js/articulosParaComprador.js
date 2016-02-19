@@ -1,5 +1,37 @@
  $(document).ready(function() {
-      var page=1;
+     var page=1;
+     habYdeshabBotones(page, $("#cantidadPaginas").val());
+
+     var viendoFiltros=true;
+     $("#modoFiltros").click(function(){
+        if(viendoFiltros){
+            viendoFiltros=false;
+            $("#filtros").hide();
+            $("#textoModoFiltros").text("Ver Filtros");
+        }else{
+            viendoFiltros=true;
+            $("#filtros").show();
+            $("#filtros").css("visibility","visible");
+            $("#textoModoFiltros").text("Ocultar Filtros");
+        }
+     });
+
+     $("#filtroMarca").keyup(function(e){
+         e.preventDefault();
+         page=1;
+         llamadoAjax();
+     });
+
+     //$("#filtroModelo").keyup(function(e){
+     //    e.preventDefault();
+     //    page=1;
+     //    llamadoAjax();
+     //});
+
+     $("#marcasPorPagina").change(function(){
+        page=1;
+        llamadoAjax();
+     });
 
      $("#previa1").click(function(){
          if(page!=1){
@@ -36,12 +68,18 @@
      });
 
      function llamadoAjax() {
+         var filtroMarca= $("#filtroMarca").val();
+         var filtroModelo= $("#filtroModelo").val();
+         var cantidad= $("#marcasPorPagina").val();
          $.ajax({
              url: 'articulosParaComprador',
              type: 'get',
              dataType: "json",
              data: {
+                 filtroMarca: filtroMarca,
+                 //filtroModelo: filtroModelo,
                  page: page,
+                 cantidad: cantidad,
                  csrfmiddlewaretoken: '{{ csrf_token }}'
              },
              success: function (data) {
@@ -52,10 +90,12 @@
                  var myNode = document.getElementById("datosMarcas");
                  if (marcas.length == 0) {
                      $("#datosMarcas").hide();
-                     $("#infoPagActual1").text("Ningun articulo posee tales filtros");
-                     $("#infoPagActual2").text("Ningun articulo posee tales filtros");
+                     $("#infoPagActual2").hide();
+                     $("#infoPagActual").text("Ningun articulo posee tales filtros");
                  }
                  else {
+                     $("#infoPagActual2").show();
+                     $("#infoPagActual2").css("visibility","visible");
                      $("#datosMarcas").show();
                      $("#datosMarcas").css('visibility', 'visible');
                      myNode.innerHTML = '';
