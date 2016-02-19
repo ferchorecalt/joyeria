@@ -108,12 +108,22 @@ def articulosParaComprador(request):
     try:
         marcas = todasLasPaginas.page(page)
     except PageNotAnInteger:
+        page=1
         # If page is not an integer, deliver first page.
         marcas = todasLasPaginas.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         marcas = todasLasPaginas.page(todasLasPaginas.num_pages)
-    return render(request, 'articulosParaComprador.html', {'marcas':marcas})
+    if request.is_ajax():
+            # data = serializers.serialize("json", articulos)
+            data = map(lambda x: x.what_i_need_in_ajax_call_for_marca(),  marcas)
+            return HttpResponse(json.dumps({
+                                    "marcas": list(data),
+                                    "cantPaginas": todasLasPaginas.num_pages,
+                                    "page": page}),
+                   content_type='application/json')
+    return render(request, 'articulosParaComprador.html', {'marcas':marcas,"cantidadPaginas": todasLasPaginas.num_pages,
+                                    "paginaActual": page})
 
 @login_required(login_url='login.html')
 def listadoArticulos(request):
@@ -147,9 +157,9 @@ def listadoArticulos(request):
         articulos = todasLasPaginas.page(todasLasPaginas.num_pages)
     if request.is_ajax():
             # data = serializers.serialize("json", articulos)
-            data = map(lambda x: x.what_i_need_in_ajax_call(),  articulos)
+            data = map(lambda x: x.what_i_need_in_ajax_call_for_articulo(),  articulos)
             return HttpResponse(json.dumps({
-                                    "articulos": json.dumps(list(data), default=date_handler),
+                                    "articulos": list(data),
                                     "cantPaginas": todasLasPaginas.num_pages,
                                     "page": page,
                                     "orden": orden}),

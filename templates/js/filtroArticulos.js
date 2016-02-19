@@ -151,7 +151,7 @@
              success: function (data) {
                  $("#infoPagActual").text("Pagina "+data["page"]+" de "+data["cantPaginas"]);
                  habYdeshabBotones(data["page"],data["cantPaginas"]);
-                 var articulos = JSON.parse(data["articulos"]);
+                 var articulos = data["articulos"];
                  var myNode = document.getElementById("tablaArticulos");
                  if(articulos.length == 0){
                      $("#tablaArticulos").hide();

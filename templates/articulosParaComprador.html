@@ -20,6 +20,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/articulosComprador.css' %}" rel='stylesheet' type='text/css' />
 <!--Custom Theme files-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		/>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script  src="{% static 'js/modernizr.custom.js' %}"></script>
+<script  src="{% static 'js/articulosParaComprador.js' %}"></script>
  <!--start-smoth-scrolling-->
 <script type="text/javascript" src="{% static 'js/move-top.js' %}" ></script>
 <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
@@ -91,51 +93,66 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 	<!--Mail Starts Here -->
 	<div class="Contact">
-            <h3>Listado de Articulos Disponibles </h3>
+            <h3 id="titulo">Listado de Articulos Disponibles </h3>
 				<div class="contact-section wow bounceIn" data-wow-delay="0.4s">
-                    <div class="pagination">
-                                                <span class="step-links">
-                                                    {% if marcas.has_previous %}
-                                                        <a href="?page={{ marcas.previous_page_number }}">Previa</a>
-                                                    {% endif %}
-
-                                                    <span class="current">
-                                                        Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.
-                                                    </span>
-
-                                                    {% if marcas.has_next %}
-                                                        <a href="?page={{ marcas.next_page_number }}">Siguiente</a>
-                                                    {% endif %}
-                                                </span>
+                    <div class="text-center" id="divPaginacion">
+                                    <button type="button" id="previa1" class="btn btn-warning">Previa</button>
+                                    <label id="infoPagActual">Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
+                                    <button type="button" id="siguiente1" class="btn btn-warning">Siguiente</button>
+                                </div>
+                                <input type="hidden" id="cantidadPaginas" value="{{ cantidadPaginas}}"/>
                     </div>
-                    {% for marca in marcas %}
-                        <div class="collection-section wow bounceInLeft" data-wow-delay="0.4s">
-                            <div class="container">
-                                 <div class="collection-main">
-                                    <div class="col-md-4 collection-text">
-                                        <h2>{{ marca.nombre }}</h2>
-                                        <h4><img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}" width="270" height="130"> </h4>
-                                        <p>{{ marca.descripcion }}</p>
-                                            <a class="read" href="{% url "singleMarca" marca.id %}">Detalles de la Marca</a>
-                                    </div>
-                                    <div class="col-md-8 collection-images">
-                                        <h3>Coleccion {{ marca.nombre }}</h3>
-                                        {% if marca.articulo_set.all %}
-                                            {% for articulo in marca.articulo_set.all %}
-                                                <div class="col-md-4 collection-images-grid">
-                                                    <img src="{{ articulo.imagen.url}}" style="margin-top: 30px;" alt="imagen de articulo {{ forloop.counter }} de {{ marca.nombre }}" width="200" height="150">
-                                                    <h4>{{ articulo.modelo }}</h4>
-                                                    <a class="read one" href="{% url "single" articulo.id %}"> Leer mas</a>
-                                                </div>
-                                            {% endfor %}
-                                        {%  else %}
-                                            No existen articulos de la marca por el momento.
-                                        {%  endif %}
-                                    </div>
-                                     <div class="clearfix"></div>
-                                 </div>
-                            </div>
-                    {% endfor %}
+{#                    <div class="pagination">#}
+{#                                                <span class="step-links">#}
+{#                                                    {% if marcas.has_previous %}#}
+{#                                                        <a href="?page={{ marcas.previous_page_number }}">Previa</a>#}
+{#                                                    {% endif %}#}
+{##}
+{#                                                    <span class="current">#}
+{#                                                        Pagina {{ marcas.number }} de {{ marcas.paginator.num_pages }}.#}
+{#                                                    </span>#}
+{##}
+{#                                                    {% if marcas.has_next %}#}
+{#                                                        <a href="?page={{ marcas.next_page_number }}">Siguiente</a>#}
+{#                                                    {% endif %}#}
+{#                                                </span>#}
+{#                    </div>#}
+                    <div id="datosMarcas">
+                        {% for marca in marcas %}
+                            <div class="collection-section wow bounceInLeft" data-wow-delay="0.4s">
+                                <div class="container">
+                                     <div class="collection-main" id="bordeadaPuntos">
+                                        <div class="col-md-4 collection-text">
+                                            <h2>{{ marca.nombre }}</h2>
+                                            <h4><img src="{{ marca.imagen.url}}" alt="imagen de marca {{ marca.nombre }}" width="270" height="130"> </h4>
+                                            <p>{{ marca.descripcion }}</p>
+                                                <a class="read" href="{% url "singleMarca" marca.id %}">Detalles de la Marca</a>
+                                        </div>
+                                        <div class="col-md-8 collection-images" id="bordeada">
+                                            <h3>Coleccion {{ marca.nombre }}</h3>
+                                            {% if marca.articulo_set.all %}
+                                                {% for articulo in marca.articulo_set.all %}
+                                                    <div class="col-md-4 collection-images-grid">
+                                                        <img src="{{ articulo.imagen.url}}" style="margin-top: 30px;" alt="imagen de articulo {{ forloop.counter }} de {{ marca.nombre }}" width="200" height="150">
+                                                        <h4>{{ articulo.modelo }}</h4>
+                                                        <a class="read one" href="{% url "single" articulo.id %}"> Leer mas</a>
+                                                    </div>
+                                                {% endfor %}
+                                            {%  else %}
+                                                No existen articulos de la marca por el momento.
+                                            {%  endif %}
+                                        </div>
+                                         <div class="clearfix"></div>
+                                     </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center" id="divPaginacion">
+                                    <button type="button" id="previa2" class="btn btn-warning">Previa</button>
+                                    <label id="infoPagActual2">Pagina {{ paginaActual}} de {{ cantidadPaginas }}</label>
+                                    <button type="button" id="siguiente2" class="btn btn-warning">Siguiente</button>
+                                </div>
+                    </div>
 	 	        </div>
 	</div>
 </div>
