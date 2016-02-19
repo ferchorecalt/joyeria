@@ -16,7 +16,7 @@ class Marca(models.Model):
             "imagen" : self.imagen.url,
             "descripcion": self.descripcion,
             "pk": self.id,
-            "articulos": map(lambda x: x.what_i_need_in_ajax_call_for_articulo_from_marca(),  self.articulo_set.all())
+            "articulos": list(map(lambda x: x.what_i_need_in_ajax_call_for_articulo_from_marca(),  self.articulo_set.all()))
         }
 
 class Articulo(models.Model):

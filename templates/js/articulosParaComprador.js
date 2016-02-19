@@ -6,7 +6,7 @@
             page = page -1;
             llamadoAjax();
          }
-         $("#titulo").focus();
+         $("#divPaginacion").focus();
      });
 
      $("#siguiente1").click(function(){
@@ -15,7 +15,7 @@
             page = page +1;
             llamadoAjax();
          }
-         $("#titulo").focus();
+         $("#divPaginacion").focus();
      });
 
      $("#previa2").click(function(){
@@ -23,7 +23,7 @@
             page = page -1;
             llamadoAjax();
          }
-         $("#titulo").focus();
+         $("#divPaginacion").focus();
      });
 
      $("#siguiente2").click(function(){
@@ -32,7 +32,7 @@
             page = page +1;
             llamadoAjax();
          }
-         $("#titulo").focus();
+         $("#divPaginacion").focus();
      });
 
      function llamadoAjax() {
@@ -48,7 +48,7 @@
                  $("#infoPagActual").text("Pagina " + data["page"] + " de " + data["cantPaginas"]);
                  $("#infoPagActual2").text("Pagina " + data["page"] + " de " + data["cantPaginas"]);
                  habYdeshabBotones(data["page"], data["cantPaginas"]);
-                 var marcas = JSON.parse(data["marcas"]);
+                 var marcas = data["marcas"];
                  var myNode = document.getElementById("datosMarcas");
                  if (marcas.length == 0) {
                      $("#datosMarcas").hide();
@@ -73,9 +73,9 @@
                          if(marcas[i].articulos.length>0){
                              for (var j = 0; j < marcas[i].articulos.length; j++) {
                                  nuevoHtml = nuevoHtml.concat("<div class='col-md-4 collection-images-grid'>");
-                                 nuevoHtml = nuevoHtml.concat("<img src='"+marcas[i].articulos[j].imagen.url+"' style='margin-top: 30px;' alt='imagen de articulo "+j+" de "+marcas[i].nombre+" width='200' height='150'>");
+                                 nuevoHtml = nuevoHtml.concat("<img src='"+marcas[i].articulos[j].imagen+"' style='margin-top: 30px;' alt='imagen de articulo "+(j+1)+" de "+marcas[i].nombre+"' width='200' height='150'>");
                                  nuevoHtml = nuevoHtml.concat("<h4>"+marcas[i].articulos[j].modelo+"</h4>");
-                                 nuevoHtml = nuevoHtml.concat("<a class='read one' href='single/"+ marcas[i].articulos[j].id+"'> Leer mas</a></div>");
+                                 nuevoHtml = nuevoHtml.concat("<a class='read one' href='single/"+ marcas[i].articulos[j].pk+"'> Leer mas</a></div>");
                              }
                          }else{
                              nuevoHtml = nuevoHtml.concat("No existen articulos de la marca por el momento.");
